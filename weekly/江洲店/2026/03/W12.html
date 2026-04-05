@@ -355,8 +355,34 @@ body { font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif; backgr
   .time-grid{grid-template-columns:1fr}
   .staff-grid{grid-template-columns:repeat(2,1fr)}
   .labor-grid{grid-template-columns:repeat(2,1fr)}
-  .header-top{flex-direction:column;align-items:flex-start}
-  .score-items{margin-left:0}
+  /* ヘッダー: 中央揃えレイアウト */
+  .header-top{flex-direction:column;align-items:center;text-align:center;gap:12px;padding-bottom:16px}
+  .header-left{flex-direction:column;align-items:center;gap:10px}
+  .logo-mark{width:56px;height:56px;font-size:22px;border-radius:12px}
+  .header-left img{height:56px!important}
+  .brand-main{font-size:16px;text-align:center}
+  .brand-sub{font-size:11px;text-align:center}
+  .header-right{text-align:center}
+  .report-period{font-size:14px;white-space:nowrap}
+  .report-label{font-size:11px}
+
+  /* スコアバナー: 中央揃え */
+  .score-inner{flex-direction:column;align-items:center;gap:16px}
+  .score-circle-wrap{width:90px;height:90px}
+  .score-circle-wrap svg{width:90px;height:90px}
+  .score-num{font-size:28px!important}
+  .score-denom{font-size:11px!important}
+  .score-grade{font-size:32px}
+  .score-grade-wrap{align-items:center;text-align:center}
+  .score-items{margin-left:0;justify-content:center;gap:8px;width:100%}
+  .score-item{min-width:0;flex:1;padding:8px 10px}
+  .score-item-label{font-size:9px}
+  .score-item-pts{font-size:16px}
+
+  /* 日別チャート: セクションヘッダーとの干渉防止 */
+  .daily-chart-area{padding-left:36px!important;height:auto!important;min-height:180px}
+  .bar-stack-wrap{height:100px!important}
+  .chart-legend{font-size:10px;gap:8px;margin-bottom:8px}
 
   /* KPIカード: はみ出し防止 */
   .kpi-grid{grid-template-columns:repeat(2,1fr)!important;gap:8px}
@@ -366,14 +392,10 @@ body { font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif; backgr
   .kpi-sub{font-size:10px}
   .kpi-badge{font-size:9px;padding:2px 6px}
 
-  /* 日別売上チャート: はみ出し防止 */
-  .daily-chart-area{padding-left:36px!important;height:200px!important}
   .y-axis{width:34px!important;font-size:10px!important}
   .grid-lines{left:36px!important}
-  .bar-stack-wrap{height:120px!important}
   .day-info{font-size:10px!important}
   .day-info .day-label{font-size:12px!important}
-  .chart-legend{font-size:11px;gap:10px}
 
   /* 廃棄ロスカード */
   .loss-summary-grid{grid-template-columns:repeat(3,1fr)!important;gap:6px}
