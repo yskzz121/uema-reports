@@ -21,7 +21,7 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--bg-page); color:v
 
 .header {
   background: linear-gradient(135deg, #CC2200 0%, #a01b00 50%, #7a1500 100%);
-  padding: 48px 20px 40px;
+  padding: 0 20px 40px;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -33,9 +33,10 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--bg-page); color:v
               radial-gradient(ellipse at 70% 50%, rgba(255,255,255,0.05) 0%, transparent 60%);
 }
 .header-content { position:relative; z-index:1; }
-.header h1 { font-size:2em; font-weight:900; color:#fff; margin-bottom:4px; letter-spacing:0.02em; }
-.header .subtitle { color:rgba(255,255,255,0.7); font-size:1em; }
-.header .logo-mark { font-size:3.5em; margin-bottom:8px; line-height:1; }
+.header h1 { font-size:2em; font-weight:900; color:#fff; margin-bottom:2px; letter-spacing:0.02em; line-height:1.2; }
+.header .subtitle { color:rgba(255,255,255,0.7); font-size:1em; margin-top:0; }
+.header .logo-mark { margin-bottom:-60px; }
+.header .logo-mark img { height:350px; width:auto; object-fit:contain; opacity:0.95; }
 
 .container { max-width:960px; margin:0 auto; padding:32px 20px; }
 
@@ -118,7 +119,7 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--bg-page); color:v
 
 <div class="header">
   <div class="header-content">
-    <div class="logo-mark">🌺</div>
+    <div class="logo-mark"><img src="assets/logo_white.png" alt="天ぷら上間"></div>
     <h1>経営管理レポート</h1>
     <div class="subtitle">株式会社上間 ── レポートポータル</div>
   </div>
