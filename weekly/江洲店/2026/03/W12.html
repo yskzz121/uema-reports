@@ -91,7 +91,7 @@ body { font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif; backgr
 .sec-icon { font-size:18px; }
 .sec-title { font-size:16px; font-weight:700; }
 .sec-sub { font-size:11px; opacity:0.7; margin-left:auto; }
-.section-body { background:var(--bg-section); border:1px solid var(--border); border-top:none; border-radius:0 0 10px 10px; padding:20px; }
+.section-body { background:var(--bg-section); border:1px solid var(--border); border-top:none; border-radius:0 0 10px 10px; padding:20px; overflow:hidden; }
 
 /* ── KPI CARDS ── */
 .kpi-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
@@ -358,6 +358,30 @@ body { font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif; backgr
   .header-top{flex-direction:column;align-items:flex-start}
   .score-items{margin-left:0}
 
+  /* KPIカード: はみ出し防止 */
+  .kpi-grid{grid-template-columns:repeat(2,1fr)!important;gap:8px}
+  .kpi-card{padding:12px 10px;overflow:hidden}
+  .kpi-value{font-size:18px!important}
+  .kpi-label{font-size:10px}
+  .kpi-sub{font-size:10px}
+  .kpi-badge{font-size:9px;padding:2px 6px}
+
+  /* 日別売上チャート: はみ出し防止 */
+  .daily-chart-area{padding-left:36px!important;height:200px!important}
+  .y-axis{width:34px!important;font-size:10px!important}
+  .grid-lines{left:36px!important}
+  .bar-stack-wrap{height:120px!important}
+  .day-info{font-size:10px!important}
+  .day-info .day-label{font-size:12px!important}
+  .chart-legend{font-size:11px;gap:10px}
+
+  /* 廃棄ロスカード */
+  .loss-summary-grid{grid-template-columns:repeat(3,1fr)!important;gap:6px}
+  .loss-card{padding:10px 6px}
+  .loss-card-val{font-size:16px!important}
+  .loss-card-label{font-size:9px}
+  .loss-card-pct{font-size:9px}
+
   /* タブ: 横スクロール */
   .abc-tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;gap:0}
   .abc-tab{padding:8px 12px;font-size:11px;white-space:nowrap;flex-shrink:0}
@@ -529,7 +553,7 @@ body { font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif; backgr
     </div>
     <div class="section-body">
       <div class="loss-summary-grid"><div class="loss-card"><div class="loss-card-label">値引調整</div><div class="loss-card-val">¥41,735</div><div class="loss-card-pct">前出比 2.9%</div></div><div class="loss-card"><div class="loss-card-label">廃棄</div><div class="loss-card-val">¥27,622</div><div class="loss-card-pct">前出比 1.9%</div></div><div class="loss-card"><div class="loss-card-label">従業員割引</div><div class="loss-card-val">¥1,320</div><div class="loss-card-pct">前出比 0.1%</div></div></div>
-      <div style="background:linear-gradient(135deg,#E8F5E9,#F0FFF0);border:1px solid rgba(26,138,80,0.2);border-radius:10px;padding:12px 18px;margin-bottom:20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;"><div style="font-size:13px;font-weight:700;">週間ロス率（前出売上比）</div><div style="font-size:32px;font-weight:900;color:var(--accent-green);">5.0%</div><div style="font-size:12px;">目標 6.0%以下　<span style="color:var(--accent-green);">✓ 目標達成</span></div><div style="margin-left:auto;"><div style="height:10px;width:180px;background:#f0e8e4;border-radius:100px;overflow:hidden;"><div style="height:100%;width:50%;background:linear-gradient(90deg,var(--accent-green),#4CAF50);border-radius:100px;"></div></div><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--text-dim);margin-top:2px;"><span>0%</span><span>目標6%</span><span>10%</span></div></div></div>
+      <div style="background:linear-gradient(135deg,#E8F5E9,#F0FFF0);border:1px solid rgba(26,138,80,0.2);border-radius:10px;padding:14px 18px;margin-bottom:20px;text-align:center;"><div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:8px;"><div style="font-size:13px;font-weight:700;">週間ロス率（前出売上比）</div><div style="font-size:32px;font-weight:900;color:var(--accent-green);font-family:M PLUS Rounded 1c,sans-serif;">5.0%</div></div><div style="font-size:12px;margin-bottom:10px;">目標 6.0%以下　<span style="color:var(--accent-green);">✓ 目標達成</span></div><div style="max-width:300px;margin:0 auto;"><div style="height:10px;background:#f0e8e4;border-radius:100px;overflow:hidden;"><div style="height:100%;width:50%;background:linear-gradient(90deg,var(--accent-green),#4CAF50);border-radius:100px;"></div></div><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--text-dim);margin-top:2px;"><span>0%</span><span>目標6%</span><span>10%</span></div></div></div>
       <div style="display:grid;grid-template-columns:24px 1fr 56px 3fr 56px 56px 56px 64px;gap:6px;padding:4px 6px;font-size:10px;font-weight:700;color:var(--text-dim);letter-spacing:0.05em;margin-bottom:4px;"><span></span><span>商品名</span><span style="text-align:right;">前出比</span><span></span><span style="color:var(--accent-blue);text-align:center;">平日</span><span style="color:var(--accent-orange);text-align:center;">週末</span><span style="text-align:center;">合計</span><span style="text-align:right;">廃棄額</span></div><div class="loss-row-v2"><span class="loss-rank">1</span><span class="loss-name-v2">三枚肉弁当</span><span class="loss-pct-v2">0.34%</span><div class="loss-bar-wrap"><div class="loss-bar" style="width:100%"></div></div><span class="loss-qty wd">4個</span><span class="loss-qty we">11個</span><span class="loss-qty tot">15個</span><span class="loss-val-v2">¥4,857</span></div><div class="loss-row-v2"><span class="loss-rank">2</span><span class="loss-name-v2">おにコロパック(ジューシー)</span><span class="loss-pct-v2">0.22%</span><div class="loss-bar-wrap"><div class="loss-bar" style="width:65%"></div></div><span class="loss-qty wd">20個</span><span class="loss-qty we">8個</span><span class="loss-qty tot">28個</span><span class="loss-val-v2">¥3,156</span></div><div class="loss-row-v2"><span class="loss-rank">3</span><span class="loss-name-v2">塩サバ弁当</span><span class="loss-pct-v2">0.16%</span><div class="loss-bar-wrap"><div class="loss-bar" style="width:47%"></div></div><span class="loss-qty wd">3個</span><span class="loss-qty we">3個</span><span class="loss-qty tot">6個</span><span class="loss-val-v2">¥2,273</span></div><div class="loss-row-v2"><span class="loss-rank low">4</span><span class="loss-name-v2">ミニ唐揚げ弁当</span><span class="loss-pct-v2">0.15%</span><div class="loss-bar-wrap"><div class="loss-bar" style="width:44%"></div></div><span class="loss-qty wd">4個</span><span class="loss-qty we">5個</span><span class="loss-qty tot">9個</span><span class="loss-val-v2">¥2,160</span></div><div class="loss-row-v2"><span class="loss-rank low">5</span><span class="loss-name-v2">肉みそおにぎり　1個</span><span class="loss-pct-v2">0.14%</span><div class="loss-bar-wrap"><div class="loss-bar" style="width:43%"></div></div><span class="loss-qty wd">12個</span><span class="loss-qty we">11個</span><span class="loss-qty tot">23個</span><span class="loss-val-v2">¥2,066</span></div><div class="loss-row-v2"><span class="loss-rank low">6</span><span class="loss-name-v2">レグチキン(大)</span><span class="loss-pct-v2">0.13%</span><div class="loss-bar-wrap"><div class="loss-bar" style="width:39%"></div></div><span class="loss-qty wd">10個</span><span class="loss-qty we">1個</span><span class="loss-qty tot">11個</span><span class="loss-val-v2">¥1,902</span></div><div class="loss-row-v2"><span class="loss-rank low">7</span><span class="loss-name-v2">ミニ塩さば弁当</span><span class="loss-pct-v2">0.11%</span><div class="loss-bar-wrap"><div class="loss-bar" style="width:33%"></div></div><span class="loss-qty wd">4個</span><span class="loss-qty we">3個</span><span class="loss-qty tot">7個</span><span class="loss-val-v2">¥1,595</span></div><div class="loss-row-v2"><span class="loss-rank low">8</span><span class="loss-name-v2">イモ天ぷら</span><span class="loss-pct-v2">0.11%</span><div class="loss-bar-wrap"><div class="loss-bar" style="width:33%"></div></div><span class="loss-qty wd">31個</span><span class="loss-qty we">0個</span><span class="loss-qty tot">31個</span><span class="loss-val-v2">¥1,594</span></div><div class="loss-row-v2"><span class="loss-rank low">9</span><span class="loss-name-v2">巻き寿司(三ツ切り)</span><span class="loss-pct-v2">0.10%</span><div class="loss-bar-wrap"><div class="loss-bar" style="width:30%"></div></div><span class="loss-qty wd">9個</span><span class="loss-qty we">8個</span><span class="loss-qty tot">17個</span><span class="loss-val-v2">¥1,445</span></div><div class="loss-row-v2"><span class="loss-rank low">10</span><span class="loss-name-v2">ごま香る鮭わかめおにぎり</span><span class="loss-pct-v2">0.09%</span><div class="loss-bar-wrap"><div class="loss-bar" style="width:27%"></div></div><span class="loss-qty wd">8個</span><span class="loss-qty we">12個</span><span class="loss-qty tot">20個</span><span class="loss-val-v2">¥1,324</span></div>
       <div class="loss-analysis-box" style="margin-top:16px;"><div class="analysis-title">📝 廃棄傾向の分析・コメント</div><div class="analysis-item">ロス率は目標（6.0%）を 1.0% 下回っており、良好です。</div><div class="analysis-item">廃棄額1位は「三枚肉弁当」(¥4,857)です。 前出比 0.34%。</div><div class="analysis-item">値引調整額（¥41,735）が廃棄額（¥27,622）を上回っています。値引き運用の見直しを検討してください。</div><div class="analysis-item">週末のロスが平日より多い傾向です。週末の製造計画の見直しを検討してください。</div></div>
     </div>
