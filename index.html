@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>株式会社上間 経営管理レポート</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;900&family=M+PLUS+Rounded+1c:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --brand-red: #CC2200;
+  --brand-yellow: #F5C518;
+  --bg-page: #FDF8F2;
+  --bg-card: #FFFFFF;
+  --text-primary: #1A0A00;
+  --text-secondary: #5A3A2A;
+  --text-dim: #9A7A6A;
+  --border-light: #e8ddd4;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Noto Sans JP',sans-serif; background:var(--bg-page); color:var(--text-primary); min-height:100vh; }
+
+.header {
+  background: linear-gradient(135deg, #CC2200 0%, #a01b00 50%, #7a1500 100%);
+  padding: 48px 20px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.header::before {
+  content:'';
+  position:absolute; top:0;left:0;right:0;bottom:0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(245,197,24,0.12) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 50%, rgba(255,255,255,0.05) 0%, transparent 60%);
+}
+.header-content { position:relative; z-index:1; }
+.header h1 { font-size:2em; font-weight:900; color:#fff; margin-bottom:4px; letter-spacing:0.02em; }
+.header .subtitle { color:rgba(255,255,255,0.7); font-size:1em; }
+.header .logo-mark { font-family:'M PLUS Rounded 1c',sans-serif; font-size:3em; font-weight:900; color:var(--brand-yellow); margin-bottom:8px; }
+
+.container { max-width:960px; margin:0 auto; padding:32px 20px; }
+
+.section-title {
+  font-size:15px; font-weight:700; color:var(--text-secondary);
+  margin-bottom:16px; padding-bottom:8px; border-bottom:2px solid var(--border-light);
+  display:flex; align-items:center; gap:8px;
+}
+.section-title .icon { font-size:18px; }
+
+.period-group { margin-bottom:32px; }
+.period-label { font-size:13px; font-weight:700; color:var(--text-dim); margin-bottom:10px; }
+
+.report-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:12px; }
+
+.report-card {
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 16px 20px;
+  border: 1px solid var(--border-light);
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.report-card:hover { transform:translateY(-2px); box-shadow:0 4px 16px rgba(0,0,0,0.08); border-color:#ccc; }
+
+.card-icon {
+  width:44px; height:44px; border-radius:10px;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'M PLUS Rounded 1c',sans-serif; font-size:16px; font-weight:900;
+  flex-shrink:0;
+}
+.card-icon.weekly { background:rgba(204,34,0,0.08); color:var(--brand-red); }
+.card-icon.monthly { background:rgba(34,102,170,0.08); color:#2266AA; }
+.card-icon.quarterly { background:rgba(26,138,80,0.08); color:#1A8A50; }
+
+.card-body { flex:1; min-width:0; }
+.card-title { font-size:14px; font-weight:700; margin-bottom:2px; }
+.card-meta { font-size:11px; color:var(--text-dim); }
+.card-score { font-size:12px; font-weight:700; margin-top:4px; }
+.score-badge { display:inline-block; padding:2px 8px; border-radius:4px; font-size:11px; font-weight:700; }
+.score-S { background:rgba(204,34,0,0.10); color:var(--brand-red); }
+.score-A { background:rgba(26,138,80,0.10); color:#1A8A50; }
+.score-B { background:rgba(34,102,170,0.10); color:#2266AA; }
+.score-C { background:rgba(224,120,48,0.10); color:#E07830; }
+.score-D { background:rgba(154,122,106,0.10); color:#9A7A6A; }
+
+.nav-tabs { display:flex; gap:0; margin-bottom:24px; flex-wrap:wrap; }
+.nav-tab {
+  padding:10px 20px; font-size:13px; font-weight:700; cursor:pointer;
+  border:none; background:#f0e8e4; color:var(--text-dim);
+  transition:all 0.15s; font-family:'Noto Sans JP',sans-serif;
+}
+.nav-tab:first-child { border-radius:8px 0 0 8px; }
+.nav-tab:last-child { border-radius:0 8px 8px 0; }
+.nav-tab.active { background:var(--brand-red); color:#fff; }
+.nav-tab:hover:not(.active) { background:#e0d0c8; color:var(--text-secondary); }
+.nav-panel { display:none; }
+.nav-panel.active { display:block; }
+
+.store-section { margin-bottom:28px; }
+.store-header { font-size:14px; font-weight:700; color:var(--text-primary); margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+.store-dot { width:8px; height:8px; border-radius:50%; background:var(--brand-red); }
+
+.empty-state { text-align:center; padding:40px 20px; color:var(--text-dim); font-size:14px; }
+
+.footer { text-align:center; padding:24px 20px; color:var(--text-dim); font-size:11px; border-top:1px solid var(--border-light); margin-top:40px; }
+
+@media(max-width:768px){
+  .header h1 { font-size:1.4em; }
+  .report-grid { grid-template-columns:1fr; }
+  .nav-tab { padding:8px 14px; font-size:12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-content">
+    <div class="logo-mark">上間</div>
+    <h1>経営管理レポート</h1>
+    <div class="subtitle">株式会社上間 ── レポートポータル</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="switchTab('weekly',this)">週次</button>
+    <button class="nav-tab" onclick="switchTab('monthly',this)">月次</button>
+    <button class="nav-tab" onclick="switchTab('quarterly',this)">四半期</button>
+    <button class="nav-tab" onclick="switchTab('semi',this)">半期</button>
+    <button class="nav-tab" onclick="switchTab('annual',this)">年次</button>
+  </div>
+
+  <!-- 週次 -->
+  <div class="nav-panel active" id="panel-weekly">
+    <div class="section-title"><span class="icon">📊</span> 店舗別 週次レポート</div>
+
+    <div class="store-section">
+      <div class="store-header"><span class="store-dot"></span>登川店</div>
+      <div class="report-grid">
+        <a class="report-card" href="weekly/登川店/2026/03/W12.html">
+          <div class="card-icon weekly">W12</div>
+          <div class="card-body">
+            <div class="card-title">2026年3月 第12週</div>
+            <div class="card-meta">3/22（日）〜 3/28（土）</div>
+            <div class="card-score"><span class="score-badge score-A">A — 88点</span> 売上 ¥3,022,928</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="store-section">
+      <div class="store-header"><span class="store-dot"></span>江洲店</div>
+      <div class="report-grid">
+        <a class="report-card" href="weekly/江洲店/2026/03/W12.html">
+          <div class="card-icon weekly">W12</div>
+          <div class="card-body">
+            <div class="card-title">2026年3月 第12週</div>
+            <div class="card-meta">3/22（日）〜 3/28（土）</div>
+            <div class="card-score"><span class="score-badge score-A">A — 82点</span> 売上 ¥1,723,212</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 月次 -->
+  <div class="nav-panel" id="panel-monthly">
+    <div class="section-title"><span class="icon">📈</span> 月次レポート</div>
+    <div class="empty-state">月次レポートは準備中です</div>
+  </div>
+
+  <!-- 四半期 -->
+  <div class="nav-panel" id="panel-quarterly">
+    <div class="section-title"><span class="icon">📋</span> 四半期レポート</div>
+    <div class="empty-state">四半期レポートは準備中です</div>
+  </div>
+
+  <!-- 半期 -->
+  <div class="nav-panel" id="panel-semi">
+    <div class="section-title"><span class="icon">📑</span> 半期レポート</div>
+    <div class="empty-state">半期レポートは準備中です</div>
+  </div>
+
+  <!-- 年次 -->
+  <div class="nav-panel" id="panel-annual">
+    <div class="section-title"><span class="icon">📕</span> 年次レポート</div>
+    <div class="empty-state">年次レポートは準備中です</div>
+  </div>
+
+</div>
+
+<div class="footer">
+  株式会社上間 経営管理レポートシステム ── Powered by UEMA Reporting Pipeline
+</div>
+
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.nav-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
