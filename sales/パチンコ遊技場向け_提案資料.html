@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>パチンコ遊技場様 ご提案資料 | 上間沖縄天ぷら店</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Noto+Serif+JP:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1A2540;
+  --navy-light: #2C3E5A;
+  --gold: #B8912A;
+  --gold-dark: #8A6B1E;
+  --gold-light: #D4A843;
+  --gold-bg: #FBF7EE;
+  --text: #1A1A2E;
+  --text-sub: #5A6270;
+  --border: #D8D8D8;
+  --border-light: #E8E8E8;
+  --bg: #FFFFFF;
+  --bg-light: #F7F7F9;
+  --red: #C62828;
+  --red-bg: #FFF5F5;
+  --green: #2E7D32;
+  --green-bg: #F2F9F2;
+  --blue: #1565C0;
+  --blue-bg: #F0F6FF;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: #E8E8E8;
+  color: var(--text);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* === Slide System — A4横 (297mm x 210mm) === */
+.slide {
+  width: 297mm;
+  height: 210mm;
+  margin: 0 auto;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+  border-top: 10px solid #D32F2F;
+  border-bottom: 10px solid #FFC107;
+}
+
+@media screen {
+  .slide { margin: 12px auto; box-shadow: 0 2px 12px rgba(0,0,0,0.15); }
+}
+
+@media print {
+  @page { size: A4 landscape; margin: 0; }
+  body { background: white; }
+  .slide { margin: 0; box-shadow: none; width: 100%; height: 100vh; }
+  .slide:last-child { page-break-after: avoid; }
+}
+
+/* === Common === */
+.slide-header {
+  padding: 18px 36px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.slide-number {
+  font-size: 11px;
+  color: var(--text-sub);
+  letter-spacing: 1px;
+  flex-shrink: 0;
+  padding-top: 8px;
+}
+.slide-footer {
+  margin-top: auto;
+  padding: 10px 36px 16px;
+  font-size: 10px;
+  color: var(--text-sub);
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  justify-content: space-between;
+}
+.slide-body { padding: 12px 36px 8px; flex: 1; }
+
+.slide-title {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.9em;
+  font-weight: 900;
+  color: var(--navy);
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+.slide-title .accent { color: var(--gold); }
+
+.subtitle-bar {
+  display: inline-block;
+  border-left: 3px solid var(--gold);
+  padding: 4px 14px;
+  font-size: 0.98em;
+  color: var(--text-sub);
+  margin-bottom: 12px;
+}
+
+/* Cards */
+.card-grid { display: grid; gap: 12px; }
+.card-grid-2 { grid-template-columns: 1fr 1fr; }
+.card-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+.card {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 16px;
+  background: var(--bg);
+}
+.card-accent { border-left: none; }
+.card-number {
+  font-size: 0.88em;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+.card h3 {
+  font-size: 1.06em;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+.card p, .card li {
+  font-size: 0.91em;
+  color: var(--text-sub);
+  line-height: 1.55;
+}
+.card ul { padding-left: 14px; }
+
+/* Tables */
+.tbl {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.94em;
+}
+.tbl th {
+  background: var(--bg-light);
+  color: var(--navy);
+  padding: 7px 10px;
+  text-align: left;
+  font-weight: 700;
+  border-bottom: 2px solid var(--border);
+}
+.tbl td {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text);
+}
+.tbl tr:last-child td { border-bottom: none; }
+.tbl .num { text-align: right; font-variant-numeric: tabular-nums; }
+.tbl .bold { font-weight: 700; color: var(--navy); }
+.tbl .highlight { color: var(--gold-dark); font-weight: 700; }
+.tbl .total-row td { border-top: 2px solid var(--gold); font-weight: 700; color: var(--navy); background: var(--gold-bg); }
+
+/* Stat boxes */
+.stat-row { display: flex; gap: 12px; margin: 10px 0; }
+.stat-box {
+  flex: 1;
+  text-align: center;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px 8px;
+  background: var(--bg);
+}
+.stat-box .stat-value {
+  font-size: 1.6em;
+  font-weight: 900;
+  color: var(--navy);
+  line-height: 1.2;
+}
+.stat-box .stat-label {
+  font-size: 0.81em;
+  color: var(--text-sub);
+  margin-top: 3px;
+}
+
+/* Tags */
+.tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 0.81em;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.tag-gold { background: var(--gold-bg); color: var(--gold-dark); border: 1px solid #E8D5A0; }
+.tag-red { background: var(--red-bg); color: var(--red); border: 1px solid #F0C0C0; }
+.tag-green { background: var(--green-bg); color: var(--green); border: 1px solid #B8D8B8; }
+.tag-blue { background: var(--blue-bg); color: var(--blue); border: 1px solid #B0C8E8; }
+
+/* Flow */
+.flow { display: flex; align-items: center; gap: 0; margin: 12px 0; }
+.flow-step {
+  flex: 1;
+  text-align: center;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 10px;
+}
+.flow-step .step-num {
+  width: 32px; height: 32px;
+  background: var(--navy);
+  color: #FFF;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 0.98em;
+  margin-bottom: 6px;
+}
+.flow-step h4 { font-size: 1.0em; color: var(--navy); margin-bottom: 3px; }
+.flow-step p { font-size: 0.81em; color: var(--text-sub); }
+.flow-arrow { font-size: 1.1em; color: var(--gold); padding: 0 5px; flex-shrink: 0; }
+
+/* Two column */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* Emphasis */
+.em-gold { color: var(--gold-dark); font-weight: 700; }
+.em-navy { color: var(--navy); font-weight: 700; }
+.text-sm { font-size: 0.91em; color: var(--text-sub); line-height: 1.6; }
+.text-xs { font-size: 0.81em; color: var(--text-sub); }
+.mt-12 { margin-top: 12px; }
+.mt-8 { margin-top: 8px; }
+.mb-8 { margin-bottom: 8px; }
+
+/* Slide logo watermark */
+.slide-logo {
+  position: absolute;
+  top: 16px;
+  right: 24px;
+  height: 40px;
+  opacity: 0.15;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Cover */
+.cover-slide {
+  background: var(--bg);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.cover-content .logo { height: 200px; margin-bottom: 24px; }
+.cover-content h1 {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 2.2em;
+  font-weight: 900;
+  color: var(--navy);
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+.cover-content .cover-sub {
+  font-size: 0.95em;
+  color: var(--text-sub);
+  margin-bottom: 24px;
+}
+.cover-content .cover-meta {
+  font-size: 0.8em;
+  color: var(--text-sub);
+}
+.gold-line { width: 60px; height: 2px; background: var(--gold); margin: 14px auto; }
+
+/* Callout */
+.callout {
+  border: 1px solid #E8D5A0;
+  background: var(--gold-bg);
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 0.91em;
+  color: var(--text);
+  line-height: 1.55;
+}
+
+/* Check list */
+.check-list { list-style: none; padding: 0; }
+.check-list li {
+  padding: 4px 0 4px 20px;
+  position: relative;
+  font-size: 0.94em;
+  color: var(--text);
+  line-height: 1.5;
+}
+.check-list li::before {
+  content: '▶';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-size: 0.81em;
+  top: 7px;
+}
+
+/* Insight */
+.insight {
+  border-left: 3px solid var(--gold);
+  background: var(--gold-bg);
+  padding: 8px 12px;
+  margin-top: 8px;
+  border-radius: 0 4px 4px 0;
+}
+.insight p { font-size: 0.90em; color: var(--text); line-height: 1.55; }
+
+/* CTA slide */
+.cta-slide {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.cta-content h2 {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.8em;
+  font-weight: 900;
+  color: var(--navy);
+  margin-bottom: 12px;
+}
+.contact-box {
+  display: inline-block;
+  border: 2px solid var(--navy);
+  border-radius: 8px;
+  padding: 20px 36px;
+  margin: 14px 0;
+  text-align: left;
+}
+.contact-box p { font-size: 1.0em; margin-bottom: 4px; }
+.contact-box .contact-label { color: var(--text-sub); font-size: 0.90em; }
+.contact-box .contact-value { color: var(--navy); font-weight: 700; font-size: 1.1em; }
+
+/* Ranking */
+.rank-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  font-size: 0.81em;
+  font-weight: 900;
+  margin-right: 4px;
+}
+.rank-1 { background: #FFD700; color: #1A1A2E; }
+.rank-2 { background: #C0C0C0; color: #1A1A2E; }
+.rank-3 { background: #CD7F32; color: #FFF; }
+
+/* Gold border card */
+.card-gold { border: 2px solid var(--gold); background: var(--gold-bg); }
+.card-gold h3 { color: var(--gold-dark); }
+
+/* Slide 4: larger card headings */
+.slide-issues .card-number { font-size: 1.1em; }
+.slide-issues .card h3 { font-size: 1.35em; }
+</style>
+</head>
+<body>
+
+<!-- ========== SLIDE 1: COVER ========== -->
+<div class="slide cover-slide">
+  <div class="cover-content">
+    <img src="../assets/logo_cropped.png" alt="上間沖縄天ぷら店" class="logo">
+    <h1>ホール稼働率を支える<br>軽食・弁当供給サービスのご提案</h1>
+    <div class="gold-line"></div>
+    <div class="cover-sub">遊技客の離席を減らし、売上向上をサポートします</div>
+    <div class="cover-meta">
+      上間沖縄天ぷら店　法人営業部<br>
+      2026年4月
+    </div>
+  </div>
+</div>
+
+<!-- ========== SLIDE 2: 業界データ ========== -->
+<div class="slide">
+  <img class="slide-logo" src="../assets/logo_cropped.png" alt="">
+  <div class="slide-header">
+    <div class="slide-title">遊技客の<span class="accent">「食事離席」</span>が稼働率を下げている</div>
+    <div class="slide-number">02 / 09</div>
+  </div>
+  <div class="slide-body">
+    <div class="subtitle-bar">パチンコ業界の食事環境と稼働率の関係</div>
+
+    <div class="stat-row">
+      <div class="stat-box">
+        <div class="stat-value">約5時間</div>
+        <div class="stat-label">遊技客の平均滞在時間</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-value">20〜40分</div>
+        <div class="stat-label">食事休憩の離席時間</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-value" style="color:var(--red);">10人+/日</div>
+        <div class="stat-label">食事外出から戻らない客数</div>
+      </div>
+    </div>
+
+    <div class="two-col mt-8">
+      <div>
+        <div class="card card-accent">
+          <h3>大手チェーンは飲食を「標準装備」に</h3>
+          <ul class="text-sm" style="padding-left:14px;">
+            <li><span class="em-gold">マルハン「ごはんどき」</span>— 全国250店舗以上</li>
+            <li><span class="em-gold">ダイナム「めん六や」</span>— 全国304店舗、年商21.6億円</li>
+            <li><span class="em-gold">情熱食堂</span>— 全国38店舗、月商30万→200万の改善事例</li>
+          </ul>
+          <div class="insight">
+            <p>「中小ホールにとって客数を増やすのは難しいが、<span class="em-gold">滞在時間を伸ばすことは取り組める</span>」<br>— パチンコ業界コンサルタント共通見解</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card card-accent">
+          <h3>食事離席がもたらす3つの損失</h3>
+          <table class="tbl mt-8">
+            <tr>
+              <td style="width:70px;"><span class="tag tag-red">損失1</span></td>
+              <td class="text-sm">食事のため<span class="em-navy">外出→そのまま帰宅</span>。1日10人で年間数百万円の逸失売上</td>
+            </tr>
+            <tr>
+              <td style="width:70px;"><span class="tag tag-red">損失2</span></td>
+              <td class="text-sm">食事休憩20〜40分間、<span class="em-navy">遊技台の稼働がゼロ</span>に</td>
+            </tr>
+            <tr>
+              <td style="width:70px;"><span class="tag tag-red">損失3</span></td>
+              <td class="text-sm">近隣の飲食店に流出すると<span class="em-navy">競合ホールに移動</span>するリスク</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>上間沖縄天ぷら店　法人営業部</span>
+    <span>出典：情熱食堂、日遊協ファンアンケート2023、業界各社公開情報</span>
+  </div>
+</div>
+
+<!-- ========== SLIDE 3: 実地調査 ========== -->
+<div class="slide">
+  <img class="slide-logo" src="../assets/logo_cropped.png" alt="">
+  <div class="slide-header">
+    <div class="slide-title">県内遊技場<span class="accent"> 実地調査レポート</span></div>
+    <div class="slide-number">03 / 09</div>
+  </div>
+  <div class="slide-body">
+    <div class="subtitle-bar">沖縄県内の遊技場にて昼食時間帯に調査実施</div>
+
+    <div class="two-col">
+      <div>
+        <div class="card card-accent mb-8">
+          <h3>食堂の現状</h3>
+          <table class="tbl">
+            <tr><td class="text-sm" style="width:35%">客席数</td><td class="bold">23席</td></tr>
+            <tr><td class="text-sm">調理スタッフ</td><td class="bold">2名</td></tr>
+            <tr><td class="text-sm">メニュー</td><td class="text-sm">チャンプル定食、カレー、沖縄そば定食、とんかつ定食（¥480〜）</td></tr>
+            <tr><td class="text-sm">提供時間</td><td class="text-sm">注文から5〜12分（平均約7分）</td></tr>
+            <tr><td class="text-sm">品切れ</td><td class="text-sm">なし</td></tr>
+          </table>
+        </div>
+
+        <div class="card card-accent">
+          <h3>客層分析（観測55分間）</h3>
+          <table class="tbl">
+            <tr><td class="text-sm" style="width:35%">来店客数</td><td class="bold">15名</td></tr>
+            <tr><td class="text-sm">男女比</td><td class="text-sm">男性87%：女性13%</td></tr>
+            <tr><td class="text-sm">客層</td><td class="text-sm">仕事着の個人客中心（4名）、2人組×2</td></tr>
+            <tr><td class="text-sm">ピーク</td><td class="em-gold">13時以降に来客増加</td></tr>
+            <tr><td class="text-sm">備考</td><td class="text-sm">遊技目的でなく<span class="em-gold">食堂のみ利用の来店客が約4名</span>確認。一定の非遊技客が存在</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div>
+        <div class="card card-gold">
+          <h3>発見：ホール内に「食事」の選択肢がほぼない</h3>
+          <table class="tbl mt-8">
+            <tr>
+              <td class="text-sm" style="width:50%">弁当・惣菜の販売</td>
+              <td><span class="tag tag-red">なし</span></td>
+            </tr>
+            <tr>
+              <td class="text-sm">Hotbox（保温販売）</td>
+              <td><span class="tag tag-red">なし</span></td>
+            </tr>
+            <tr>
+              <td class="text-sm">菓子パン・お菓子</td>
+              <td><span class="tag tag-gold">少量あり</span></td>
+            </tr>
+            <tr>
+              <td class="text-sm">ワゴンサービス</td>
+              <td><span class="tag tag-gold">店舗による（未確認）</span></td>
+            </tr>
+          </table>
+          <div class="insight mt-8">
+            <p>菓子パンやお菓子の軽食はあるものの、<br><span class="em-gold">弁当・惣菜・天ぷらなど「食事」になるものは一切ない</span>状態です。</p>
+          </div>
+        </div>
+
+        <div class="callout mt-8">
+          💡 食堂メニューに<span class="em-gold">天ぷら・おにぎり・軽食は一切なし</span>。上間の商品は食堂と完全に補完関係にあります。
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>上間沖縄天ぷら店　法人営業部</span>
+    <span>県内遊技場 現地調査に基づく</span>
+  </div>
+</div>
+
+<!-- ========== SLIDE 4: 課題提起 ========== -->
+<div class="slide slide-issues">
+  <img class="slide-logo" src="../assets/logo_cropped.png" alt="">
+  <div class="slide-header">
+    <div class="slide-title">店内飲食にかかわる<span class="accent">「4つの課題」</span>を上間が解決</div>
+    <div class="slide-number">04 / 09</div>
+  </div>
+  <div class="slide-body">
+    <div class="subtitle-bar">全国パチンコ店舗数は7,000店を下回り（2023年）、差別化・滞在時間の向上が急務</div>
+
+    <div class="card-grid card-grid-2" style="margin-top:4px;">
+      <div class="card card-accent">
+        <div class="card-number">01</div>
+        <h3>遊技客の離席リスク</h3>
+        <p>ホール内に軽食・惣菜・弁当の提供は一切なし（実地確認済）。食事のための離席が発生し、そのまま帰宅されるリスクがあります。上間の<span class="em-gold">フィンガーフード（天ぷら・骨なしチキン等）</span>なら、遊技台の前でも食べられます。</p>
+      </div>
+      <div class="card card-accent">
+        <div class="card-number">02</div>
+        <h3>軽食・間食ニーズの空白</h3>
+        <p>食堂の最安値は¥480。「ちょっとだけ食べたい」ニーズに応える選択肢がありません。上間なら<span class="em-gold">¥140〜</span>の天ぷらから、¥500のミニ弁当まで、小口対応が可能です。</p>
+      </div>
+      <div class="card card-accent">
+        <div class="card-number">03</div>
+        <h3>メニュー追加のコスト壁</h3>
+        <p>新メニューを食堂で対応するには設備・人員・コストの壁があります。上間が<span class="em-gold">調理済み商品を毎日配達</span>するので、御社の設備投資・追加人員はゼロ。食堂にはない品目をスピーディーにカバーします。</p>
+      </div>
+      <div class="card card-accent">
+        <div class="card-number">04</div>
+        <h3>スタッフ様の昼食環境</h3>
+        <p>スタッフ様向けの<span class="em-gold">ランチ定期便</span>を導入すれば、毎日の食事環境が整い、ES（従業員満足度）の向上・定着率アップに貢献。お客様納品分とまとめてお届けできます。</p>
+      </div>
+    </div>
+
+    <div class="callout mt-12">
+      ✅ 上間の提案は<span class="em-gold">食堂の代替ではなく「補完」</span>です。しっかり食事＝食堂、ちょっと食べたい＝上間。既存の食堂運営には一切影響しません。
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>上間沖縄天ぷら店　法人営業部</span>
+    <span></span>
+  </div>
+</div>
+
+<!-- ========== SLIDE 5: 提案内容 ========== -->
+<div class="slide">
+  <img class="slide-logo" src="../assets/logo_cropped.png" alt="">
+  <div class="slide-header">
+    <div class="slide-title">ご提案内容：<span class="accent">店内食堂×上間 補完モデル</span></div>
+    <div class="slide-number">05 / 09</div>
+  </div>
+  <div class="slide-body">
+    <div class="two-col">
+      <div>
+        <h3 style="color:var(--navy);margin-bottom:10px;font-size:0.9em;">上間でお手伝いできること</h3>
+        <div style="border:1px solid #E8D5A0;background:var(--gold-bg);border-radius:4px;padding:7px 14px;margin-bottom:12px;font-size:0.78em;">
+          しっかり食事＝店内食堂　<span class="em-gold">ちょっと食べたい＝上間</span>
+        </div>
+        <ul class="check-list">
+          <li>既存メニューにはない品目（天ぷら・おにぎり・ミニ弁当・そば）をスピーディーにカバー</li>
+          <li>フィンガーフードが豊富なので<span class="em-gold">離席の軽減・時短</span>につながる</li>
+          <li>食堂が混む時間帯・閉店後のニーズもカバー</li>
+          <li>イベント日・繁忙期の急増注文にも柔軟に対応</li>
+          <li>スタッフ様の毎日の昼食配達（お客様分とまとめて納品可）</li>
+          <li>納品メニューの変更やオリジナルメニュー考案もご相談可能</li>
+        </ul>
+
+        <div class="card card-gold mt-12">
+          <h3>OEM供給（ラベルなし）対応</h3>
+          <p class="mt-8"><span class="em-gold">上間のラベルを貼らずに納品</span>できます。お客様から見れば「御社の食事サービス」としてご提供いただけます。既に複数のパチンコ店様でこの方式で運用中です。</p>
+        </div>
+      </div>
+
+      <div>
+        <h3 style="color:var(--navy);margin-bottom:10px;font-size:0.9em;">期待できる効果</h3>
+        <div class="card card-accent mb-8">
+          <h3>🎯 稼働率の維持・向上</h3>
+          <p>ホール内で軽食が手に入ることで、食事のための離席・外出が減少。遊技の継続を促し、<span class="em-gold">台の稼働率を守ります</span>。</p>
+        </div>
+        <div class="card card-accent mb-8">
+          <h3>📊 新たな売上源</h3>
+          <p>仕入れた商品をホール内で販売すれば、<span class="em-gold">追加の売上</span>に。食堂とは異なる価格帯（¥140〜）の商品で、購買の間口が広がります。</p>
+        </div>
+        <div class="card card-accent mb-8">
+          <h3>👥 スタッフ満足度UP</h3>
+          <p>毎日の食事配達でES向上を図り、人材確保コストを削減。業界全体で人手不足が深刻な中、<span class="em-gold">定着率向上</span>に貢献します。</p>
+        </div>
+        <div class="card card-accent">
+          <h3>⚡ 導入の手軽さ</h3>
+          <p>設備投資ゼロ、追加人員ゼロ。まずは<span class="em-gold">スポット注文</span>からでもOK。定期化で担当者の発注工数も削減できます。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>上間沖縄天ぷら店　法人営業部</span>
+    <span></span>
+  </div>
+</div>
+
+<!-- ========== SLIDE 6: 導入実績 ========== -->
+<div class="slide">
+  <img class="slide-logo" src="../assets/logo_cropped.png" alt="">
+  <div class="slide-header">
+    <div class="slide-title">導入実績：<span class="accent">県内遊技場で継続運用中</span></div>
+    <div class="slide-number">06 / 09</div>
+  </div>
+  <div class="slide-body">
+    <div class="two-col">
+      <div>
+        <div class="card card-accent mb-8">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <h3>A様（名護市・遊技場）</h3>
+            <span class="tag tag-gold">リピーター</span>
+          </div>
+          <div class="stat-row" style="margin:8px 0 6px;">
+            <div class="stat-box" style="padding:8px 6px;">
+              <div class="stat-value" style="font-size:1.2em;">¥43,300</div>
+              <div class="stat-label">1回あたり</div>
+            </div>
+            <div class="stat-box" style="padding:8px 6px;">
+              <div class="stat-value" style="font-size:1.2em;">定期</div>
+              <div class="stat-label">まとめ注文</div>
+            </div>
+          </div>
+          <table class="tbl">
+            <tr><th>商品</th><th class="num">数量</th><th class="num">小計</th></tr>
+            <tr><td>ミニ弁当（5種）</td><td class="num">45</td><td class="num">¥22,500</td></tr>
+            <tr><td>骨なしチキン</td><td class="num">35</td><td class="num">¥6,300</td></tr>
+            <tr><td>おにぎりパック（3種）</td><td class="num">45</td><td class="num">¥12,600</td></tr>
+            <tr><td>揚げサンド・サーターアンダギー</td><td class="num">10</td><td class="num">¥1,900</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div>
+        <div class="card card-accent mb-8">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <h3>B様（那覇市・遊技場）</h3>
+            <span class="tag tag-gold">リピーター・請求書払い</span>
+          </div>
+          <div class="stat-row" style="margin:8px 0 6px;">
+            <div class="stat-box" style="padding:8px 6px;">
+              <div class="stat-value" style="font-size:1.2em;">¥9,540</div>
+              <div class="stat-label">1回あたり</div>
+            </div>
+            <div class="stat-box" style="padding:8px 6px;">
+              <div class="stat-value" style="font-size:1.2em;">毎日</div>
+              <div class="stat-label">こまめに注文</div>
+            </div>
+          </div>
+          <table class="tbl">
+            <tr><th>商品</th><th class="num">数量</th><th class="num">小計</th></tr>
+            <tr><td>沖縄そば(小)</td><td class="num">15</td><td class="num">¥2,400</td></tr>
+            <tr><td>ポーク玉子おにぎり</td><td class="num">4</td><td class="num">¥1,280</td></tr>
+            <tr><td>ミニ弁当（3種）</td><td class="num">3</td><td class="num">¥1,480</td></tr>
+            <tr><td>天ぷら・チキン</td><td class="num">10</td><td class="num">¥1,600</td></tr>
+            <tr><td>おにぎり各種</td><td class="num">12</td><td class="num">¥2,780</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col mt-8">
+      <div class="card card-gold">
+        <h3>人気商品ランキング（導入先合計）</h3>
+        <table class="tbl mt-8">
+          <tr>
+            <td><span class="rank-badge rank-1">1</span> ミニ弁当シリーズ</td>
+            <td class="num bold">¥500</td>
+            <td class="text-sm">48個/回 — 食事代替の主力商品</td>
+          </tr>
+          <tr>
+            <td><span class="rank-badge rank-2">2</span> おにぎりパック</td>
+            <td class="num bold">¥280</td>
+            <td class="text-sm">45個/回 — 片手で食べられる軽食</td>
+          </tr>
+          <tr>
+            <td><span class="rank-badge rank-3">3</span> 骨なしチキン</td>
+            <td class="num bold">¥180</td>
+            <td class="text-sm">45個/回 — フィンガーフードの定番</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="callout" style="display:flex;flex-direction:column;justify-content:center;">
+        <p style="font-size:1.1em;line-height:1.8;">
+          <span class="em-gold">✅ ラベルなし（OEM）での納品にも対応</span><br>
+          お客様から見れば店舗独自の食事サービスとして運用可能です。<br><br>
+          <span class="em-gold">✅ 配達で直接お届け</span><br>
+          コンテナボックスにまとめて、指定時間に担当者へ引き渡し。
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>上間沖縄天ぷら店　法人営業部</span>
+    <span>※実際の注文伝票に基づくデータ（2026年3月）</span>
+  </div>
+</div>
+
+<!-- ========== SLIDE 7: 導入プラン ========== -->
+<div class="slide">
+  <img class="slide-logo" src="../assets/logo_cropped.png" alt="">
+  <div class="slide-header">
+    <div class="slide-title">導入プランと<span class="accent">ステップ</span></div>
+    <div class="slide-number">07 / 09</div>
+  </div>
+  <div class="slide-body">
+    <div class="subtitle-bar">まずは1店舗・スポット注文から。段階的に拡大いただけます</div>
+
+    <div class="card-grid card-grid-3" style="margin-top:6px;gap:10px;">
+      <div class="card" style="border:2px solid var(--green);padding:10px 12px;">
+        <div style="text-align:center;margin-bottom:4px;">
+          <span class="tag tag-green">STEP 1</span>
+        </div>
+        <h3 style="text-align:center;font-size:0.95em;">お試しスポット</h3>
+        <div style="text-align:center;margin:6px 0;">
+          <div style="font-size:1.3em;font-weight:900;color:var(--green);">週1〜2回</div>
+          <div style="font-size:0.7em;color:var(--text-sub);">まずは1店舗で</div>
+        </div>
+        <table class="tbl" style="font-size:0.82em;">
+          <tr><td>1回あたり</td><td class="num bold">約¥10,000</td></tr>
+          <tr><td>月間目安</td><td class="num bold">¥4〜8万</td></tr>
+        </table>
+        <p style="font-size:0.7em;color:var(--text-sub);text-align:center;margin-top:6px;">サンプル試食からでもOK<br>お電話1本でご注文いただけます</p>
+        <div style="margin-top:6px;padding:5px 6px;border:1px solid #E8D5A0;background:var(--gold-bg);border-radius:4px;">
+          <p style="font-size:0.7em;color:var(--text);text-align:center;"><span class="em-gold">🍲 イベントデーに最適</span><br>沖縄そば・中味汁ケータリングも対応<br>（鍋・コンロ等一式貸出あり）</p>
+        </div>
+      </div>
+
+      <div class="card" style="border:2px solid var(--blue);padding:10px 12px;">
+        <div style="text-align:center;margin-bottom:4px;">
+          <span class="tag tag-blue">STEP 2</span>
+        </div>
+        <h3 style="text-align:center;font-size:0.95em;">定期化</h3>
+        <div style="text-align:center;margin:6px 0;">
+          <div style="font-size:1.3em;font-weight:900;color:var(--blue);">週3〜5回</div>
+          <div style="font-size:0.7em;color:var(--text-sub);">売れ筋メニューで定期配達</div>
+        </div>
+        <table class="tbl" style="font-size:0.82em;">
+          <tr><td>1回あたり</td><td class="num bold">約¥10,000</td></tr>
+          <tr><td>月間目安</td><td class="num bold">¥12〜25万</td></tr>
+        </table>
+        <p style="font-size:0.7em;color:var(--text-sub);text-align:center;margin-top:6px;">曜日・数量の定期パターンを設定<br>発注の手間がほぼゼロに</p>
+      </div>
+
+      <div class="card" style="border:2px solid var(--gold);padding:10px 12px;">
+        <div style="text-align:center;margin-bottom:4px;">
+          <span class="tag tag-gold">STEP 3</span>
+        </div>
+        <h3 style="text-align:center;font-size:0.95em;">複数店舗展開</h3>
+        <div style="text-align:center;margin:6px 0;">
+          <div style="font-size:1.3em;font-weight:900;color:var(--gold-dark);">複数店舗</div>
+          <div style="font-size:0.7em;color:var(--text-sub);">成功パターンを横展開</div>
+        </div>
+        <table class="tbl" style="font-size:0.82em;">
+          <tr><td>1店舗あたり</td><td class="num bold">¥12〜25万/月</td></tr>
+          <tr><td>10店舗の場合</td><td class="num highlight">¥120〜250万/月</td></tr>
+        </table>
+        <p style="font-size:0.7em;color:var(--text-sub);text-align:center;margin-top:6px;">店舗ごとに売れ筋を最適化<br>配送ルートもまとめて効率化</p>
+      </div>
+    </div>
+
+    <div style="max-width:55%;margin-top:8px;">
+      <div class="card" style="padding:10px 14px;">
+        <h3 style="font-size:0.9em;">推奨メニュー構成（案）</h3>
+        <p style="font-size:0.65em;color:var(--text-sub);margin-bottom:4px;">食堂の既存メニューと被らない商品で構成</p>
+        <table class="tbl" style="font-size:0.8em;">
+          <tr><th>商品</th><th class="num">数量</th><th class="num">金額</th></tr>
+          <tr><td>沖縄そば(小) ¥160</td><td class="num">20</td><td class="num">¥3,200</td></tr>
+          <tr><td>ポーク玉子おにぎり ¥320</td><td class="num">8</td><td class="num">¥2,560</td></tr>
+          <tr><td>ミニ弁当（3種）¥480〜500</td><td class="num">9</td><td class="num">¥4,500</td></tr>
+          <tr><td>天ぷら各種 ¥140</td><td class="num">10</td><td class="num">¥1,400</td></tr>
+          <tr><td>骨なしチキン ¥180</td><td class="num">5</td><td class="num">¥900</td></tr>
+          <tr class="total-row"><td>合計（1回あたり）</td><td class="num">52点</td><td class="num">¥12,560</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>上間沖縄天ぷら店　法人営業部</span>
+    <span></span>
+  </div>
+</div>
+
+<!-- ========== SLIDE 8: 料金・納品の流れ ========== -->
+<div class="slide">
+  <img class="slide-logo" src="../assets/logo_cropped.png" alt="">
+  <div class="slide-header">
+    <div class="slide-title">料金・<span class="accent">納品の流れ</span></div>
+    <div class="slide-number">08 / 09</div>
+  </div>
+  <div class="slide-body">
+    <div class="subtitle-bar">シンプルな4ステップ。お電話1本でスタートできます</div>
+
+    <div class="flow mt-8">
+      <div class="flow-step">
+        <div class="step-num">1</div>
+        <h4>ご注文</h4>
+        <p>納品日の2日前までに<br>お電話にて</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="step-num">2</div>
+        <h4>製造・梱包</h4>
+        <p>当日早朝より<br>新鮮な素材で調理</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="step-num">3</div>
+        <h4>配達・納品</h4>
+        <p>コンテナボックスで<br>ご指定時間にお届け</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="step-num">4</div>
+        <h4>お支払い</h4>
+        <p>納品時 or<br>翌月末まとめ請求</p>
+      </div>
+    </div>
+
+    <div class="two-col mt-12">
+      <div>
+        <h3 style="color:var(--navy);margin-bottom:10px;font-size:0.85em;">主要商品と価格一覧</h3>
+        <table class="tbl" style="font-size:0.82em;">
+          <tr><th>カテゴリ</th><th>商品例</th><th class="num">税込価格</th></tr>
+          <tr><td>天ぷら</td><td>野菜天ぷら、イモ天ぷら</td><td class="num bold">¥140</td></tr>
+          <tr><td>チキン</td><td>骨なしチキン</td><td class="num bold">¥180</td></tr>
+          <tr><td>おにぎり</td><td>じゅーしー、梅、鮭、しそ</td><td class="num bold">¥150</td></tr>
+          <tr><td>おにぎり</td><td>ポーク玉子おにぎり</td><td class="num bold">¥320</td></tr>
+          <tr><td>パック</td><td>おにコロパック</td><td class="num bold">¥270</td></tr>
+          <tr><td>そば</td><td>沖縄そば（小）</td><td class="num bold">¥160</td></tr>
+          <tr><td>弁当</td><td>三色弁当</td><td class="num bold">¥480</td></tr>
+          <tr><td>弁当</td><td>ミニ弁当各種（三枚肉・とんかつ・唐揚げ等）</td><td class="num bold">¥500</td></tr>
+        </table>
+        <p class="text-xs mt-8">※上記以外にも多数の商品をご用意しております。メニュー表は別途お渡しいたします。</p>
+      </div>
+
+      <div>
+        <h3 style="color:var(--navy);margin-bottom:10px;font-size:0.85em;">取引条件</h3>
+        <div class="card mb-8">
+          <table class="tbl">
+            <tr><td class="text-sm" style="width:35%;">最低注文額</td><td class="text-sm">制限なし（小口注文歓迎）</td></tr>
+            <tr><td class="text-sm">注文方法</td><td class="text-sm">電話（納品2日前まで）</td></tr>
+            <tr><td class="text-sm">納品方法</td><td class="text-sm">配達（コンテナボックス）</td></tr>
+            <tr><td class="text-sm">ラベル</td><td class="em-gold">上間ラベルなし対応可</td></tr>
+            <tr><td class="text-sm">お支払い</td><td class="text-sm">都度 or 翌月末まとめ請求</td></tr>
+            <tr><td class="text-sm">配達エリア</td><td class="text-sm">沖縄本島全域</td></tr>
+          </table>
+        </div>
+
+        <div class="callout">
+          📌 定期注文の場合は、曜日・数量・配達時間をパターン化し、<span class="em-gold">毎回の発注作業を不要</span>にできます。変更がある場合のみご連絡ください。
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>上間沖縄天ぷら店　法人営業部</span>
+    <span></span>
+  </div>
+</div>
+
+<!-- ========== SLIDE 9: 会社概要 + CTA ========== -->
+<div class="slide">
+  <img class="slide-logo" src="../assets/logo_cropped.png" alt="">
+  <div class="slide-header">
+    <div class="slide-title">会社概要・<span class="accent">お問い合わせ</span></div>
+    <div class="slide-number">09 / 09</div>
+  </div>
+  <div class="slide-body">
+    <div class="two-col">
+      <div>
+        <div style="text-align:center;margin-bottom:20px;">
+          <img src="../assets/logo_cropped.png" alt="上間沖縄天ぷら店" style="height:180px;">
+        </div>
+
+        <table class="tbl">
+          <tr><td class="text-sm" style="width:30%;background:var(--bg-light);font-weight:700;">会社名</td><td class="bold">株式会社上間</td></tr>
+          <tr><td class="text-sm" style="background:var(--bg-light);font-weight:700;">ブランド</td><td>天ぷら上間 / 上間沖縄天ぷら店</td></tr>
+          <tr><td class="text-sm" style="background:var(--bg-light);font-weight:700;">設立</td><td>2002年（法人化2009年）</td></tr>
+          <tr><td class="text-sm" style="background:var(--bg-light);font-weight:700;">資本金</td><td>990万円</td></tr>
+          <tr><td class="text-sm" style="background:var(--bg-light);font-weight:700;">代表</td><td>代表取締役会長 上間 喜壽<br>取締役社長 上間 園子</td></tr>
+          <tr><td class="text-sm" style="background:var(--bg-light);font-weight:700;">従業員数</td><td>125名</td></tr>
+          <tr><td class="text-sm" style="background:var(--bg-light);font-weight:700;">本社所在地</td><td>沖縄県沖縄市登川3-23-20</td></tr>
+          <tr><td class="text-sm" style="background:var(--bg-light);font-weight:700;">直営店舗</td><td>7店舗（セントラルキッチン併設）</td></tr>
+          <tr><td class="text-sm" style="background:var(--bg-light);font-weight:700;">企業理念</td><td class="text-sm">食を通して沖縄の文化を守り、伝え、発展させていく</td></tr>
+        </table>
+      </div>
+
+      <div>
+        <div class="card card-accent mb-8">
+          <h3>製造・供給体制</h3>
+          <ul class="check-list">
+            <li><span class="em-gold">セントラルキッチン完備</span> — 日産数千食の製造能力</li>
+            <li>沖縄ファミリーマート全326店舗への供給実績が<span class="em-gold">品質・衛生管理・安定供給</span>の証明</li>
+            <li>自社配送網で沖縄本島全域をカバー</li>
+            <li>法人向け定期納品・スポット注文の両方に対応</li>
+          </ul>
+        </div>
+
+        <div style="border:2px solid var(--navy);border-radius:8px;padding:20px 24px;margin-bottom:12px;">
+          <h3 style="color:var(--navy);font-size:1.1em;margin-bottom:4px;text-align:center;">まずはお試しから</h3>
+          <p class="text-sm" style="text-align:center;margin-bottom:12px;">スポット注文大歓迎。サンプルメニューのお試しもお気軽にご相談ください。</p>
+          <table class="tbl">
+            <tr><td class="text-sm" style="width:25%;background:var(--bg-light);font-weight:700;">部門</td><td class="bold">上間沖縄天ぷら店　法人営業部</td></tr>
+            <tr><td class="text-sm" style="background:var(--bg-light);font-weight:700;">担当</td><td class="bold">小谷 良智</td></tr>
+            <tr><td class="text-sm" style="background:var(--bg-light);font-weight:700;">TEL</td><td class="bold" style="font-size:1.1em;">098-937-9477</td></tr>
+            <tr><td class="text-sm" style="background:var(--bg-light);font-weight:700;">Email</td><td>y.kotani@uemabento.com</td></tr>
+          </table>
+          <p class="text-xs mt-8" style="text-align:center;">お電話、メールにてお気軽にご連絡ください</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>上間沖縄天ぷら店　法人営業部</span>
+    <span>2026年4月</span>
+  </div>
+</div>
+
+</body>
+</html>

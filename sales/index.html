@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>法人営業部 資料ポータル | 上間沖縄天ぷら店</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --brand-red: #D32F2F;
+  --brand-yellow: #FFC107;
+  --navy: #1A2540;
+  --gold: #B8912A;
+  --gold-dark: #8A6B1E;
+  --gold-bg: #FBF7EE;
+  --text: #1A1A2E;
+  --text-sub: #5A6270;
+  --bg: #F7F7F9;
+  --white: #FFFFFF;
+  --border: #D8D8D8;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Noto Sans JP',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
+
+/* Header */
+.header {
+  background: var(--white);
+  border-top: 6px solid var(--brand-red);
+  border-bottom: 1px solid var(--border);
+  padding: 32px 20px;
+  text-align: center;
+}
+.header-inner { max-width: 800px; margin: 0 auto; }
+.header .logo { height: 80px; margin-bottom: 16px; }
+.header h1 {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.8em;
+  font-weight: 900;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+.header .subtitle {
+  font-size: 0.9em;
+  color: var(--text-sub);
+}
+.header .dept-badge {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 4px 16px;
+  background: var(--navy);
+  color: #fff;
+  border-radius: 4px;
+  font-size: 0.78em;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Container */
+.container { max-width: 800px; margin: 0 auto; padding: 32px 20px 60px; }
+
+/* Section */
+.section {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+.section-header {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-header h2 {
+  font-size: 1.05em;
+  font-weight: 700;
+  color: var(--navy);
+}
+.section-header .count {
+  background: var(--gold-bg);
+  color: var(--gold-dark);
+  font-size: 0.72em;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+/* File card */
+.file-card {
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.15s;
+}
+.file-card:last-child { border-bottom: none; }
+.file-card:hover { background: #fafafa; }
+
+.file-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1em;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+.file-icon.html { background: #E3F2FD; color: #1565C0; }
+.file-icon.md { background: #F3E5F5; color: #7B1FA2; }
+.file-icon.spec { background: var(--gold-bg); color: var(--gold-dark); }
+
+.file-info { flex: 1; }
+.file-info h3 {
+  font-size: 0.92em;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+.file-info p {
+  font-size: 0.78em;
+  color: var(--text-sub);
+  line-height: 1.4;
+}
+.file-meta {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+}
+.file-meta span {
+  font-size: 0.7em;
+  color: var(--text-sub);
+  background: var(--bg);
+  padding: 1px 8px;
+  border-radius: 3px;
+}
+
+.file-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 14px;
+  border-radius: 6px;
+  font-size: 0.78em;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.15s;
+  border: none;
+  cursor: pointer;
+}
+.btn-primary {
+  background: var(--navy);
+  color: #fff;
+}
+.btn-primary:hover { background: #2C3E5A; }
+.btn-outline {
+  background: transparent;
+  color: var(--navy);
+  border: 1px solid var(--border);
+}
+.btn-outline:hover { background: var(--bg); }
+
+/* Back link */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-sub);
+  text-decoration: none;
+  font-size: 0.82em;
+  margin-bottom: 20px;
+  transition: color 0.15s;
+}
+.back-link:hover { color: var(--navy); }
+
+/* Info bar */
+.info-bar {
+  background: var(--gold-bg);
+  border: 1px solid #E8D5A0;
+  border-radius: 8px;
+  padding: 14px 20px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.85em;
+  color: var(--text);
+  line-height: 1.5;
+}
+.info-bar .info-icon { font-size: 1.3em; flex-shrink: 0; }
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 0.72em;
+  color: var(--text-sub);
+  border-top: 1px solid var(--border);
+  background: var(--white);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .header h1 { font-size: 1.3em; }
+  .file-card { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .file-actions { width: 100%; }
+  .btn { flex: 1; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <img src="../assets/logo_cropped.png" alt="上間沖縄天ぷら店" class="logo">
+    <h1>法人営業部 資料ポータル</h1>
+    <p class="subtitle">上間沖縄天ぷら店</p>
+    <div class="dept-badge">SALES DEPARTMENT</div>
+  </div>
+</div>
+
+<div class="container">
+  <a href="../" class="back-link">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    経営管理レポートに戻る
+  </a>
+
+  <div class="info-bar">
+    <span class="info-icon">📋</span>
+    <div>BtoB法人営業で使用する提案資料・仕様書を管理しています。<br>HTMLファイルはブラウザで閲覧・印刷、MDファイルはダウンロードしてご利用ください。</div>
+  </div>
+
+  <!-- 提案資料セクション -->
+  <div class="section">
+    <div class="section-header">
+      <h2>提案資料</h2>
+      <span class="count" id="proposalCount"></span>
+    </div>
+
+    <div class="file-card">
+      <div class="file-icon html">HTML</div>
+      <div class="file-info">
+        <h3>パチンコ遊技場向け 提案資料</h3>
+        <p>ホール稼働率を支える軽食・弁当供給サービスのご提案（全9スライド）</p>
+        <div class="file-meta">
+          <span>A4横印刷対応</span>
+          <span>2026年4月</span>
+          <span>汎用版</span>
+        </div>
+      </div>
+      <div class="file-actions">
+        <a href="パチンコ遊技場向け_提案資料.html" class="btn btn-primary" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          開く
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 仕様書・テンプレセクション -->
+  <div class="section">
+    <div class="section-header">
+      <h2>仕様書・テンプレート</h2>
+      <span class="count" id="specCount"></span>
+    </div>
+
+    <div class="file-card">
+      <div class="file-icon spec">SPEC</div>
+      <div class="file-info">
+        <h3>営業資料デザイン仕様書</h3>
+        <p>カラーパレット、フォント体系、コンポーネント仕様、印刷設定、テンプレート構成を定義</p>
+        <div class="file-meta">
+          <span>Markdown</span>
+          <span>v1.0</span>
+          <span>2026年4月</span>
+        </div>
+      </div>
+      <div class="file-actions">
+        <a href="上間_営業資料_デザイン仕様書.md" class="btn btn-outline" download>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          ダウンロード
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  上間沖縄天ぷら店 法人営業部 &copy; 2026
+</div>
+
+<script>
+// Count files in each section
+document.querySelectorAll('.section').forEach(function(sec) {
+  var count = sec.querySelectorAll('.file-card').length;
+  var badge = sec.querySelector('.count');
+  if (badge) badge.textContent = count + '件';
+});
+</script>
+</body>
+</html>
