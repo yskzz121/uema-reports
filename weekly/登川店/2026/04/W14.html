@@ -612,51 +612,12 @@ body { font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif; backgr
 
   <!-- ⑨ バスケット分析 -->
   <div class="section" id="sec-basket">
-    <div class="section-header">
-      <span class="sec-icon">🛒</span>
-      <span class="sec-title">バスケット分析（購買行動）</span>
-      <span class="sec-sub">併買パターン・品数分布・ペルソナ別</span>
-    </div>
+    <div class="section-header"><span class="sec-icon">🛒</span><span class="sec-title">バスケット分析（購買行動）</span><span class="sec-sub">併買パターン・品数分布・ペルソナ別</span></div>
     <div class="section-body">
-    <style>
-    .bk-kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
-    .bk-kpi-card{background:linear-gradient(135deg,#fff,#FFF8F0);border:1px solid var(--border,rgba(204,34,0,0.12));border-radius:10px;padding:16px;text-align:center}
-    .bk-kpi-card .bk-label{font-size:.72rem;color:var(--text-dim,#9A7A6A);margin-bottom:4px}
-    .bk-kpi-card .bk-value{font-family:'M PLUS Rounded 1c',sans-serif;font-size:1.6rem;font-weight:800;color:var(--text-primary,#1A0A00)}
-    .bk-kpi-card .bk-sub{font-size:.7rem;color:var(--text-dim,#9A7A6A);margin-top:4px}
-    .bk-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
-    .bk-card{background:var(--bg-section,#FFF5EC);border-radius:12px;padding:20px;border:1px solid var(--border,rgba(204,34,0,0.12))}
-    .bk-card h4{font-size:.95rem;color:var(--brand-red,#CC2200);margin-bottom:12px;font-weight:700}
-    .bk-chart-box{height:260px;margin-bottom:8px;position:relative}
-    .bk-pair-a,.bk-pair-b{background:var(--bg-section,#FFF5EC);padding:2px 8px;border-radius:4px;font-size:.85rem;font-weight:600}
-    .bk-pair-x{color:#999;margin:0 4px}
-    .bk-pair-bar{height:8px;background:linear-gradient(90deg,var(--brand-yellow,#F5C518),var(--brand-red,#CC2200));border-radius:4px;min-width:4px}
-    .bk-single-item{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid rgba(204,34,0,0.06)}
-    .bk-single-rank{color:var(--brand-red,#CC2200);font-weight:700;font-size:.8rem;width:28px}
-    .bk-single-name{flex:1;font-size:.88rem}
-    .bk-single-count{font-weight:600;font-size:.85rem;color:var(--text-dim,#9A7A6A)}
-    .bk-heavy-item{display:flex;align-items:center;gap:8px;padding:5px 0}
-    .bk-heavy-name{width:120px;font-size:.82rem;flex-shrink:0}
-    .bk-heavy-bar-wrap{flex:1;height:8px;background:rgba(204,34,0,0.08);border-radius:4px;overflow:hidden}
-    .bk-heavy-bar{height:100%;background:linear-gradient(90deg,var(--brand-yellow,#F5C518),var(--brand-red,#CC2200));border-radius:4px}
-    .bk-heavy-pct{width:40px;text-align:right;font-size:.8rem;font-weight:600;color:var(--text-dim,#9A7A6A)}
-    .bk-insight{background:linear-gradient(135deg,var(--brand-red,#CC2200),#8B1500);color:white;border-radius:12px;padding:20px;margin-top:16px}
-    .bk-insight h4{color:var(--brand-yellow,#F5C518);font-size:1rem;margin-bottom:10px;border-bottom:1px solid rgba(245,197,24,0.3);padding-bottom:8px}
-    .bk-insight li{margin-bottom:8px;font-size:.88rem;line-height:1.5}
-    @media(max-width:768px){.bk-grid,.bk-kpi{grid-template-columns:1fr}.bk-heavy-name{width:90px}}
-    </style>
-    <div class="bk-kpi">
-      <div class="bk-kpi-card"><div class="bk-label">前出バスケット数</div><div class="bk-value">3,251</div><div class="bk-sub">7日間（注文除く）</div></div>
-      <div class="bk-kpi-card"><div class="bk-label">平均品数</div><div class="bk-value">3.3<span style="font-size:.9rem">品</span></div><div class="bk-sub">レジ袋除く</div></div>
-      <div class="bk-kpi-card"><div class="bk-label">1品客の割合</div><div class="bk-value">16.4<span style="font-size:.9rem">%</span></div><div class="bk-sub">533件 / 平均¥405</div></div>
-    </div>
-    <div class="bk-grid">
-      <div class="bk-card"><h4>📊 品数分布 × 客単価</h4><div class="bk-chart-box"><canvas id="bkDistChart"></canvas></div></div>
-      <div class="bk-card"><h4>⏰ 時間帯別 平均品数 × 客単価</h4><div class="bk-chart-box"><canvas id="bkSlotChart"></canvas></div></div>
-    </div>
-    <div class="bk-card" style="margin-bottom:16px">
-      <h4>🔗 併買ペア TOP10</h4>
-      <table style="width:100%;font-size:.88rem;border-collapse:collapse"><thead><tr style="border-bottom:2px solid var(--border)"><th style="padding:8px;text-align:left">#</th><th style="padding:8px;text-align:left">商品ペア</th><th style="padding:8px;text-align:left">回数</th><th style="padding:8px;width:30%"></th></tr></thead><tbody><tr><td>1</td><td><span class="bk-pair-a">イカ天ぷら</span> <span class="bk-pair-x">×</span> <span class="bk-pair-b">魚天ぷら</span></td><td><strong>362</strong>回</td><td><div class="bk-pair-bar" style="width:100%"></div></td></tr>
+    <style>.bk-kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}.bk-kpi-card{background:linear-gradient(135deg,#fff,#FFF8F0);border:1px solid var(--border,rgba(204,34,0,0.12));border-radius:10px;padding:16px;text-align:center}.bk-kpi-card .bk-label{font-size:.72rem;color:var(--text-dim,#9A7A6A);margin-bottom:4px}.bk-kpi-card .bk-value{font-family:'M PLUS Rounded 1c',sans-serif;font-size:1.6rem;font-weight:800;color:var(--text-primary,#1A0A00)}.bk-kpi-card .bk-sub{font-size:.7rem;color:var(--text-dim,#9A7A6A);margin-top:4px}.bk-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}.bk-card{background:var(--bg-section,#FFF5EC);border-radius:12px;padding:20px;border:1px solid var(--border,rgba(204,34,0,0.12))}.bk-card h4{font-size:.95rem;color:var(--brand-red,#CC2200);margin-bottom:12px;font-weight:700}.bk-chart-box{height:260px;margin-bottom:8px;position:relative}.bk-pair-a,.bk-pair-b{background:var(--bg-section,#FFF5EC);padding:2px 8px;border-radius:4px;font-size:.85rem;font-weight:600}.bk-pair-x{color:#999;margin:0 4px}.bk-pair-bar{height:8px;background:linear-gradient(90deg,var(--brand-yellow,#F5C518),var(--brand-red,#CC2200));border-radius:4px;min-width:4px}.bk-single-item{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid rgba(204,34,0,0.06)}.bk-single-rank{color:var(--brand-red,#CC2200);font-weight:700;font-size:.8rem;width:28px}.bk-single-name{flex:1;font-size:.88rem}.bk-single-count{font-weight:600;font-size:.85rem;color:var(--text-dim,#9A7A6A)}.bk-heavy-item{display:flex;align-items:center;gap:8px;padding:5px 0}.bk-heavy-name{width:120px;font-size:.82rem;flex-shrink:0}.bk-heavy-bar-wrap{flex:1;height:8px;background:rgba(204,34,0,0.08);border-radius:4px;overflow:hidden}.bk-heavy-bar{height:100%;background:linear-gradient(90deg,var(--brand-yellow,#F5C518),var(--brand-red,#CC2200));border-radius:4px}.bk-heavy-pct{width:40px;text-align:right;font-size:.8rem;font-weight:600;color:var(--text-dim,#9A7A6A)}.bk-insight{background:linear-gradient(135deg,var(--brand-red,#CC2200),#8B1500);color:white;border-radius:12px;padding:20px;margin-top:16px}.bk-insight h4{color:var(--brand-yellow,#F5C518);font-size:1rem;margin-bottom:10px;border-bottom:1px solid rgba(245,197,24,0.3);padding-bottom:8px}.bk-insight li{margin-bottom:8px;font-size:.88rem;line-height:1.5}@media(max-width:768px){.bk-grid,.bk-kpi{grid-template-columns:1fr}.bk-heavy-name{width:90px}}</style>
+    <div class="bk-kpi"><div class="bk-kpi-card"><div class="bk-label">前出バスケット数</div><div class="bk-value">3,251</div><div class="bk-sub">7日間（注文除く）</div></div><div class="bk-kpi-card"><div class="bk-label">平均品数</div><div class="bk-value">3.3<span style="font-size:.9rem">品</span></div><div class="bk-sub">レジ袋除く</div></div><div class="bk-kpi-card"><div class="bk-label">1品客の割合</div><div class="bk-value">16.4<span style="font-size:.9rem">%</span></div><div class="bk-sub">533件 / 平均¥405</div></div></div>
+    <div class="bk-grid"><div class="bk-card"><h4>📊 品数分布 × 客単価</h4><div class="bk-chart-box"><canvas id="bkDistChart"></canvas></div></div><div class="bk-card"><h4>⏰ 時間帯別 平均品数 × 客単価</h4><div class="bk-chart-box"><canvas id="bkSlotChart"></canvas></div></div></div>
+    <div class="bk-card" style="margin-bottom:16px"><h4>🔗 併買ペア TOP10</h4><table style="width:100%;font-size:.88rem;border-collapse:collapse"><thead><tr style="border-bottom:2px solid var(--border)"><th style="padding:8px;text-align:left">#</th><th style="padding:8px;text-align:left">商品ペア</th><th style="padding:8px;text-align:left">回数</th><th style="padding:8px;width:30%"></th></tr></thead><tbody><tr><td>1</td><td><span class="bk-pair-a">イカ天ぷら</span> <span class="bk-pair-x">×</span> <span class="bk-pair-b">魚天ぷら</span></td><td><strong>362</strong>回</td><td><div class="bk-pair-bar" style="width:100%"></div></td></tr>
 <tr><td>2</td><td><span class="bk-pair-a">イカ天ぷら</span> <span class="bk-pair-x">×</span> <span class="bk-pair-b">野菜天ぷら</span></td><td><strong>168</strong>回</td><td><div class="bk-pair-bar" style="width:46%"></div></td></tr>
 <tr><td>3</td><td><span class="bk-pair-a">野菜天ぷら</span> <span class="bk-pair-x">×</span> <span class="bk-pair-b">魚天ぷら</span></td><td><strong>163</strong>回</td><td><div class="bk-pair-bar" style="width:45%"></div></td></tr>
 <tr><td>4</td><td><span class="bk-pair-a">そばフタ(小)</span> <span class="bk-pair-x">×</span> <span class="bk-pair-b">沖縄そば(小)</span></td><td><strong>155</strong>回</td><td><div class="bk-pair-bar" style="width:43%"></div></td></tr>
@@ -666,10 +627,8 @@ body { font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif; backgr
 <tr><td>8</td><td><span class="bk-pair-a">イカ天ぷら</span> <span class="bk-pair-x">×</span> <span class="bk-pair-b">沖縄そば(小)</span></td><td><strong>129</strong>回</td><td><div class="bk-pair-bar" style="width:36%"></div></td></tr>
 <tr><td>9</td><td><span class="bk-pair-a">沖縄そば(小)</span> <span class="bk-pair-x">×</span> <span class="bk-pair-b">野菜天ぷら</span></td><td><strong>127</strong>回</td><td><div class="bk-pair-bar" style="width:35%"></div></td></tr>
 <tr><td>10</td><td><span class="bk-pair-a">ゲソ天ぷら</span> <span class="bk-pair-x">×</span> <span class="bk-pair-b">野菜天ぷら</span></td><td><strong>116</strong>回</td><td><div class="bk-pair-bar" style="width:32%"></div></td></tr>
-</tbody></table>
-    </div>
-    <div class="bk-grid">
-      <div class="bk-card"><h4>👤 ペルソナ別バスケット</h4><table style="width:100%;font-size:.85rem;border-collapse:collapse"><thead><tr style="border-bottom:2px solid var(--border)"><th style="padding:6px;text-align:left">属性</th><th style="padding:6px">件数</th><th style="padding:6px">平均品数</th><th style="padding:6px">客単価</th></tr></thead><tbody><tr><td><strong>男50代</strong></td><td>1458</td><td>3.4品</td><td>¥926</td></tr>
+</tbody></table></div>
+    <div class="bk-grid"><div class="bk-card"><h4>👤 ペルソナ別バスケット</h4><table style="width:100%;font-size:.85rem;border-collapse:collapse"><thead><tr style="border-bottom:2px solid var(--border)"><th style="padding:6px;text-align:left">属性</th><th style="padding:6px">件数</th><th style="padding:6px">平均品数</th><th style="padding:6px">客単価</th></tr></thead><tbody><tr><td><strong>男50代</strong></td><td>1458</td><td>3.4品</td><td>¥926</td></tr>
 <tr><td><strong>男40代</strong></td><td>1375</td><td>3.3品</td><td>¥872</td></tr>
 <tr><td><strong>女50代</strong></td><td>166</td><td>4.0品</td><td>¥1,194</td></tr>
 <tr><td><strong>女40代</strong></td><td>164</td><td>3.2品</td><td>¥900</td></tr>
@@ -677,8 +636,7 @@ body { font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif; backgr
 <tr><td><strong>女20代</strong></td><td>15</td><td>2.3品</td><td>¥595</td></tr>
 <tr><td><strong>男60代</strong></td><td>12</td><td>2.8品</td><td>¥694</td></tr>
 <tr><td><strong>男30代</strong></td><td>10</td><td>4.1品</td><td>¥1,050</td></tr>
-</tbody></table></div>
-      <div class="bk-card"><h4>🎯 1品客の購入商品</h4><div class="bk-single-item"><span class="bk-single-rank">#1</span><span class="bk-single-name">沖縄そば(小)</span><span class="bk-single-count">85件</span></div>
+</tbody></table></div><div class="bk-card"><h4>🎯 1品客の購入商品</h4><div class="bk-single-item"><span class="bk-single-rank">#1</span><span class="bk-single-name">沖縄そば(小)</span><span class="bk-single-count">85件</span></div>
 <div class="bk-single-item"><span class="bk-single-rank">#2</span><span class="bk-single-name">とんかつ弁当</span><span class="bk-single-count">42件</span></div>
 <div class="bk-single-item"><span class="bk-single-rank">#3</span><span class="bk-single-name">沖縄そば(中)</span><span class="bk-single-count">35件</span></div>
 <div class="bk-single-item"><span class="bk-single-rank">#4</span><span class="bk-single-name">三枚肉弁当</span><span class="bk-single-count">24件</span></div>
@@ -686,8 +644,7 @@ body { font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif; backgr
 <div class="bk-single-item"><span class="bk-single-rank">#6</span><span class="bk-single-name">ミニとんかつ弁当</span><span class="bk-single-count">20件</span></div>
 <div class="bk-single-item"><span class="bk-single-rank">#7</span><span class="bk-single-name">ミニささみカツ弁当</span><span class="bk-single-count">18件</span></div>
 <div class="bk-single-item"><span class="bk-single-rank">#8</span><span class="bk-single-name">ミニ塩さば弁当</span><span class="bk-single-count">17件</span></div>
-<div style="margin-top:10px;font-size:.78rem;color:var(--text-dim)">1品客533件のうち<strong>沖縄そば(小)85件（16%）</strong>が最多</div></div>
-    </div>
+<div style="margin-top:10px;font-size:.78rem;color:var(--text-dim)">1品客533件のうち<strong>沖縄そば(小)85件（16%）</strong>が最多</div></div></div>
     <div class="bk-card" style="margin-bottom:16px"><h4>🏆 4品以上バスケット（1222件）の頻出商品</h4><div class="bk-heavy-item"><span class="bk-heavy-name">魚天ぷら</span><span class="bk-heavy-bar-wrap"><span class="bk-heavy-bar" style="width:41.325695581014735%"></span></span><span class="bk-heavy-pct">41%</span></div>
 <div class="bk-heavy-item"><span class="bk-heavy-name">イカ天ぷら</span><span class="bk-heavy-bar-wrap"><span class="bk-heavy-bar" style="width:38.62520458265139%"></span></span><span class="bk-heavy-pct">39%</span></div>
 <div class="bk-heavy-item"><span class="bk-heavy-name">野菜天ぷら</span><span class="bk-heavy-bar-wrap"><span class="bk-heavy-bar" style="width:25.695581014729953%"></span></span><span class="bk-heavy-pct">26%</span></div>
@@ -697,12 +654,8 @@ body { font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif; backgr
 <div class="bk-heavy-item"><span class="bk-heavy-name">骨なしチキン</span><span class="bk-heavy-bar-wrap"><span class="bk-heavy-bar" style="width:14.075286415711949%"></span></span><span class="bk-heavy-pct">14%</span></div>
 <div class="bk-heavy-item"><span class="bk-heavy-name">ウィンナー天ぷら</span><span class="bk-heavy-bar-wrap"><span class="bk-heavy-bar" style="width:13.420621931260229%"></span></span><span class="bk-heavy-pct">13%</span></div>
 </div>
-    <div class="bk-insight"><h4>💡 バスケット分析からの経営アクション</h4><ol>
-    <li><strong>セット商品化</strong> — 1品客の16%が沖縄そば(小)単品。併買1位（362回）とのセット化で客単価UP</li>
-    <li><strong>品数向上施策</strong> — 平均3.3品。1品客→3品への転換30%で<strong>週¥59,825の売上UP</strong></li>
-    </ol></div>
-    </div>
-  </div>
+    <div class="bk-insight"><h4>💡 バスケット分析からの経営アクション</h4><ol><li><strong>セット商品化</strong> — 1品客の16%が沖縄そば(小)単品。併買1位（362回）とのセット化で客単価UP</li><li><strong>品数向上施策</strong> — 平均3.3品。1品客→3品への転換30%で<strong>週¥59,825の売上UP</strong></li></ol></div>
+    </div></div>
 
   <!-- ⑨ 店長への改善提案 -->
   <div class="section">
@@ -885,12 +838,7 @@ function switchAbc(type, btn) {
 }
 
 
-(function(){
-  var dc=document.getElementById('bkDistChart'),sc=document.getElementById('bkSlotChart');
-  if(!dc||!sc)return;
-  new Chart(dc,{type:'bar',data:{labels:["1", "2", "3", "4", "5", "6", "7", "8"],datasets:[{label:'件数',data:[533, 777, 719, 498, 325, 148, 109, 61],backgroundColor:'#F5C518',yAxisID:'y',borderRadius:4},{label:'平均客単価',data:[405, 562, 779, 1010, 1217, 1565, 2073, 2238],type:'line',borderColor:'#CC2200',backgroundColor:'#CC2200',yAxisID:'y1',tension:.3,pointRadius:4,pointBackgroundColor:'#CC2200'}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{position:'left',title:{display:true,text:'件数',font:{size:11}}},y1:{position:'right',title:{display:true,text:'客単価',font:{size:11}},ticks:{callback:function(v){return'¥'+v}},grid:{drawOnChartArea:false}}},plugins:{title:{display:true,text:'品数分布と平均客単価',font:{size:13,weight:'bold'}}}}});
-  new Chart(sc,{type:'bar',data:{labels:["06-08", "09-11", "12-14", "15-17", "18+"],datasets:[{label:'平均品数',data:[3.0, 3.5, 3.5, 3.4, 2.9],backgroundColor:'#2266AA',yAxisID:'y',borderRadius:4},{label:'平均客単価',data:[779, 1027, 973, 885, 560],type:'line',borderColor:'#CC2200',backgroundColor:'#CC2200',yAxisID:'y1',tension:.3,pointRadius:4,pointBackgroundColor:'#CC2200'}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{position:'left',title:{display:true,text:'平均品数',font:{size:11}}},y1:{position:'right',title:{display:true,text:'客単価',font:{size:11}},ticks:{callback:function(v){return'¥'+v}},grid:{drawOnChartArea:false}}},plugins:{title:{display:true,text:'時間帯別 平均品数×客単価',font:{size:13,weight:'bold'}}}}});
-})();
+(function(){var dc=document.getElementById('bkDistChart'),sc=document.getElementById('bkSlotChart');if(!dc||!sc)return;new Chart(dc,{type:'bar',data:{labels:["1", "2", "3", "4", "5", "6", "7", "8"],datasets:[{label:'件数',data:[533, 777, 719, 498, 325, 148, 109, 61],backgroundColor:'#F5C518',yAxisID:'y',borderRadius:4},{label:'平均客単価',data:[405, 562, 779, 1010, 1217, 1565, 2073, 2238],type:'line',borderColor:'#CC2200',backgroundColor:'#CC2200',yAxisID:'y1',tension:.3,pointRadius:4,pointBackgroundColor:'#CC2200'}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{position:'left',title:{display:true,text:'件数',font:{size:11}}},y1:{position:'right',title:{display:true,text:'客単価',font:{size:11}},ticks:{callback:function(v){return'¥'+v}},grid:{drawOnChartArea:false}}},plugins:{title:{display:true,text:'品数分布と平均客単価',font:{size:13,weight:'bold'}}}}});new Chart(sc,{type:'bar',data:{labels:["06-08", "09-11", "12-14", "15-17", "18+"],datasets:[{label:'平均品数',data:[3.0, 3.5, 3.5, 3.4, 2.9],backgroundColor:'#2266AA',yAxisID:'y',borderRadius:4},{label:'平均客単価',data:[779, 1027, 973, 885, 560],type:'line',borderColor:'#CC2200',backgroundColor:'#CC2200',yAxisID:'y1',tension:.3,pointRadius:4,pointBackgroundColor:'#CC2200'}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{position:'left',title:{display:true,text:'平均品数',font:{size:11}}},y1:{position:'right',title:{display:true,text:'客単価',font:{size:11}},ticks:{callback:function(v){return'¥'+v}},grid:{drawOnChartArea:false}}},plugins:{title:{display:true,text:'時間帯別 平均品数×客単価',font:{size:13,weight:'bold'}}}}});})();
 
 </script>
 
