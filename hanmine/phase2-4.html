@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phase 2-4 完了レポート | 半嶺当徹土地家屋調査士事務所</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+:root {
+  --navy: #1A2540;
+  --navy-light: #243352;
+  --gold: #B8912A;
+  --gold-light: #D4A843;
+  --paper: #F5F2EC;
+  --text: #2C2C2C;
+  --text-sub: #6B7280;
+  --positive: #1B7A3D;
+  --negative: #8B2020;
+  --card-bg: #FFFFFF;
+  --border: rgba(184,145,42,0.12);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: system-ui, -apple-system, 'Hiragino Sans', 'Yu Gothic', sans-serif;
+  background: var(--paper);
+  color: var(--text);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px 60px;
+}
+
+/* === Header === */
+.header {
+  background: linear-gradient(135deg, #1a2332 0%, #1A2540 50%, #0F1829 100%);
+  color: #fff;
+  border-bottom: 1px solid rgba(184,145,42,0.15);
+  padding: 48px 24px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(184,145,42,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 50%, rgba(184,145,42,0.06) 0%, transparent 60%);
+}
+.header-content { position: relative; z-index: 1; }
+.header-badge {
+  display: inline-block;
+  background: rgba(184,145,42,0.15);
+  border: 1px solid rgba(184,145,42,0.3);
+  border-radius: 8px;
+  padding: 6px 18px;
+  font-size: 13px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+.header h1 {
+  font-size: 2em;
+  font-weight: 900;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+.header .subtitle {
+  color: rgba(255,255,255,0.7);
+  font-size: 1.1em;
+  margin-bottom: 4px;
+}
+.header .date {
+  color: rgba(255,255,255,0.5);
+  font-size: 0.85em;
+  margin-top: 8px;
+}
+
+/* === Section === */
+.section {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 32px;
+  margin-top: 24px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  border: 1px solid var(--border);
+}
+.section-title {
+  font-size: 1.2em;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-icon { font-size: 1.1em; }
+
+/* === Executive Summary === */
+.exec-summary {
+  background: linear-gradient(135deg, #1A2540 0%, #1e2d4a 100%);
+  color: #fff;
+  border-radius: 12px;
+  padding: 32px;
+  margin-top: 24px;
+  border: 1px solid rgba(184,145,42,0.15);
+}
+.exec-summary .section-title {
+  color: var(--gold-light);
+  margin-bottom: 16px;
+}
+.exec-summary ul { list-style: none; padding: 0; }
+.exec-summary li {
+  padding: 8px 0;
+  padding-left: 28px;
+  position: relative;
+  font-size: 1.05em;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.9);
+}
+.exec-summary li::before {
+  content: '\2713';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 1.1em;
+}
+
+/* === Roadmap === */
+.roadmap-steps {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.roadmap-step {
+  flex: 1;
+  background: #F7F8FA;
+  border: 1px solid #E5E7EB;
+  border-radius: 10px;
+  padding: 20px 14px;
+  text-align: center;
+  position: relative;
+  transition: all 0.2s;
+}
+.roadmap-step.completed {
+  background: linear-gradient(135deg, rgba(184,145,42,0.08) 0%, rgba(212,168,67,0.05) 100%);
+  border-color: var(--gold);
+  box-shadow: 0 2px 8px rgba(184,145,42,0.1);
+}
+.step-number {
+  font-size: 0.75em;
+  font-weight: 700;
+  color: var(--text-sub);
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+.roadmap-step.completed .step-number { color: var(--gold); }
+.step-label {
+  font-size: 0.85em;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+.step-detail {
+  font-size: 0.72em;
+  color: var(--text-sub);
+  line-height: 1.5;
+}
+.step-status { margin-top: 10px; font-size: 0.78em; font-weight: 700; }
+.step-status.done { color: var(--gold); }
+.step-status.pending { color: #9CA3AF; }
+.roadmap-impact {
+  background: linear-gradient(135deg, var(--navy) 0%, #1e2d4a 100%);
+  color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  font-size: 1em;
+}
+.roadmap-impact strong {
+  color: var(--gold-light);
+  font-size: 1.2em;
+}
+
+/* === Feature Cards === */
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+.feature-grid.two-col {
+  grid-template-columns: 1fr 1fr;
+}
+.feature-grid.four-col {
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.feature-card {
+  background: #F7F8FA;
+  border: 1px solid #E5E7EB;
+  border-radius: 10px;
+  padding: 24px;
+}
+.feature-card-icon {
+  font-size: 1.8em;
+  margin-bottom: 12px;
+}
+.feature-card-title {
+  font-weight: 700;
+  font-size: 0.95em;
+  color: var(--navy);
+  margin-bottom: 10px;
+}
+.feature-card p {
+  font-size: 0.88em;
+  color: var(--text);
+  line-height: 1.7;
+}
+.feature-card .detail-note {
+  font-size: 0.78em;
+  color: var(--gold);
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+/* === Flow Chart === */
+.flow-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: 20px 0;
+}
+.flow-step {
+  background: #F7F8FA;
+  border: 1px solid #E5E7EB;
+  border-radius: 10px;
+  padding: 16px 32px;
+  text-align: center;
+  min-width: 320px;
+  max-width: 420px;
+  width: 100%;
+  font-size: 0.92em;
+  font-weight: 500;
+  color: var(--navy);
+}
+.flow-step.highlight {
+  background: linear-gradient(135deg, rgba(184,145,42,0.08) 0%, rgba(212,168,67,0.05) 100%);
+  border-color: var(--gold);
+  box-shadow: 0 2px 8px rgba(184,145,42,0.1);
+}
+.flow-step .flow-auto {
+  display: inline-block;
+  background: rgba(184,145,42,0.15);
+  border: 1px solid rgba(184,145,42,0.3);
+  border-radius: 6px;
+  padding: 2px 10px;
+  font-size: 0.78em;
+  color: var(--gold);
+  margin-left: 8px;
+  font-weight: 700;
+}
+.flow-arrow {
+  color: var(--gold);
+  font-size: 1.4em;
+  padding: 6px 0;
+  line-height: 1;
+}
+
+/* === Chart === */
+.chart-container {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* === CTA Box === */
+.cta-box {
+  background: linear-gradient(135deg, #1A2540 0%, #1e2d4a 100%);
+  color: #fff;
+  border-radius: 12px;
+  padding: 32px;
+  margin-top: 24px;
+  border: 1px solid rgba(184,145,42,0.15);
+}
+.cta-box .section-title {
+  color: var(--gold-light);
+}
+.cta-subtitle {
+  font-weight: 700;
+  font-size: 0.95em;
+  color: var(--gold-light);
+  margin-top: 24px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.cta-list {
+  list-style: none;
+  padding: 0;
+  counter-reset: cta;
+}
+.cta-list li {
+  padding: 10px 0;
+  padding-left: 28px;
+  position: relative;
+  color: rgba(255,255,255,0.9);
+  font-size: 0.95em;
+  line-height: 1.7;
+}
+.cta-list.numbered li { counter-increment: cta; }
+.cta-list.numbered li::before {
+  content: counter(cta);
+  position: absolute;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  background: var(--gold);
+  color: var(--navy);
+  border-radius: 50%;
+  font-size: 0.72em;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 12px;
+}
+.cta-code {
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-top: 16px;
+  font-family: 'SF Mono', 'Menlo', monospace;
+  font-size: 0.85em;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.8;
+  overflow-x: auto;
+}
+.cta-code .comment {
+  color: rgba(255,255,255,0.4);
+}
+
+/* === Footer === */
+.footer {
+  background: #0F1829;
+  color: rgba(255,255,255,0.5);
+  padding: 32px 24px;
+  text-align: center;
+  margin-top: 40px;
+  border-top: 1px solid rgba(184,145,42,0.1);
+}
+.footer-confidential {
+  font-size: 0.72em;
+  letter-spacing: 3px;
+  color: rgba(184,145,42,0.4);
+  margin-bottom: 6px;
+}
+.footer-credit {
+  font-size: 0.78em;
+  color: rgba(255,255,255,0.3);
+}
+
+/* === Mobile === */
+@media (max-width: 768px) {
+  .header { padding: 32px 16px 28px; }
+  .header h1 { font-size: 1.4em; }
+  .container { padding: 0 12px 40px; }
+  .section { padding: 24px 18px; }
+  .roadmap-steps { flex-direction: column; }
+  .feature-grid { grid-template-columns: 1fr; }
+  .feature-grid.two-col { grid-template-columns: 1fr; }
+  .feature-grid.four-col { grid-template-columns: 1fr; }
+  .flow-step { min-width: unset; }
+  .cta-box { padding: 24px 18px; }
+  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+}
+@media (max-width: 480px) {
+  .header h1 { font-size: 1.2em; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-content">
+    <div class="header-badge">U&I Consulting</div>
+    <h1>業務自動化プロジェクト Phase 2-4 完了レポート</h1>
+    <div class="subtitle">半嶺当徹土地家屋調査士事務所</div>
+    <div class="date">2026年4月10日</div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- 1. Executive Summary -->
+<div class="exec-summary">
+  <div class="section-title"><span class="section-icon">📋</span> エグゼクティブサマリー</div>
+  <ul>
+    <li>Phase 1（案件DB構築）に続き、Phase 2〜4が全て完了しました</li>
+    <li>地番を入力するだけで、謄本の自動取得からPDF保存・DB登録まで一括処理できるようになりました</li>
+    <li>案件の登録・ステータス管理・申請書類の生成が、ブラウザ1つで完結します</li>
+    <li>次のステップはPhase 5：実際の案件を使った統合テストです</li>
+  </ul>
+</div>
+
+<!-- 2. Roadmap -->
+<div class="section">
+  <div class="section-title"><span class="section-icon">🗺️</span> プロジェクト全体像</div>
+  <div class="roadmap-steps">
+    <div class="roadmap-step completed">
+      <div class="step-number">PHASE 1</div>
+      <div class="step-label">案件DB構築</div>
+      <div class="step-detail">過去案件の構造化<br>データベース化</div>
+      <div class="step-status done">✅ 完了</div>
+    </div>
+    <div class="roadmap-step completed">
+      <div class="step-number">PHASE 2</div>
+      <div class="step-label">資料収集の自動化</div>
+      <div class="step-detail">謄本の自動取得<br>書類の自動整理</div>
+      <div class="step-status done">✅ 完了</div>
+    </div>
+    <div class="roadmap-step completed">
+      <div class="step-number">PHASE 3</div>
+      <div class="step-label">申請書の自動生成</div>
+      <div class="step-detail">申請データシート<br>調査報告書</div>
+      <div class="step-status done">✅ 完了</div>
+    </div>
+    <div class="roadmap-step completed">
+      <div class="step-number">PHASE 4</div>
+      <div class="step-label">ブラウザ管理画面</div>
+      <div class="step-detail">案件管理ダッシュボード<br>ワンクリック操作</div>
+      <div class="step-status done">✅ 完了</div>
+    </div>
+    <div class="roadmap-step">
+      <div class="step-number">PHASE 5</div>
+      <div class="step-label">統合テスト</div>
+      <div class="step-detail">実案件での検証<br>改善・調整</div>
+      <div class="step-status pending">次のステップ</div>
+    </div>
+  </div>
+  <div class="roadmap-impact">
+    Phase 1〜4の完了により、月 <strong>110〜145時間</strong> の業務時間を圧縮（正社員約1人分に相当）
+  </div>
+</div>
+
+<!-- 3. Phase 2: 資料収集の自動化 -->
+<div class="section">
+  <div class="section-title"><span class="section-icon">📄</span> Phase 2: 資料収集の自動化</div>
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="feature-card-icon">🏛️</div>
+      <div class="feature-card-title">謄本の自動取得</div>
+      <p>地番を入力すると、登記情報提供サービスに自動でログインし、PDFをダウンロードしてデータベースに登録します。</p>
+      <div class="detail-note">テスト2筆成功（取得費用: 1筆330円）</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-card-icon">📂</div>
+      <div class="feature-card-title">スキャン書類の自動振り分け</div>
+      <p>複合機でスキャンした書類から地番を読み取り、正しい案件フォルダに自動で移動・整理します。手作業でのファイル整理が不要になります。</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-card-icon">🔧</div>
+      <div class="feature-card-title">統合ツール</div>
+      <p>謄本取得・書類整理・データベース検索など、7つの機能を1つのツールに統合。操作を覚える手間を最小限にしました。</p>
+    </div>
+  </div>
+</div>
+
+<!-- 4. Phase 3: 申請書の自動生成 -->
+<div class="section">
+  <div class="section-title"><span class="section-icon">📝</span> Phase 3: 申請書の自動生成</div>
+  <div class="feature-grid two-col">
+    <div class="feature-card">
+      <div class="feature-card-icon">📊</div>
+      <div class="feature-card-title">申請データシート（Excel）</div>
+      <p>データベースから案件情報を読み取り、4シート構成のExcelファイルを自動生成します。</p>
+      <p style="margin-top:10px; font-size:0.85em; color:var(--text-sub);">
+        <strong>基本情報</strong> / <strong>物件一覧</strong> / <strong>添付書類チェックリスト</strong> / <strong>建物の表示</strong>
+      </p>
+      <div class="detail-note">「しるす」への手入力が不要に</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-card-icon">📑</div>
+      <div class="feature-card-title">調査報告書（印刷用）</div>
+      <p>データベースの情報から調査報告書の定型部分（01〜03）を自動入力します。現場記入欄（04〜07）は空欄テンプレートとして出力。</p>
+      <div class="detail-note">A4用紙に最適化・そのまま印刷可能</div>
+    </div>
+  </div>
+</div>
+
+<!-- 5. Phase 4: ブラウザ管理画面 -->
+<div class="section">
+  <div class="section-title"><span class="section-icon">💻</span> Phase 4: ブラウザ管理画面（ダッシュボード）</div>
+  <div class="feature-grid four-col">
+    <div class="feature-card">
+      <div class="feature-card-icon">➕</div>
+      <div class="feature-card-title">案件登録</div>
+      <p>案件タイプ（建物表題・滅失等）、所在地、顧客名を入力して新規案件を登録。すぐにデータベースに反映されます。</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-card-icon">📋</div>
+      <div class="feature-card-title">ステータス管理</div>
+      <p>各案件のステータスをドロップダウンで即座に変更できます。</p>
+      <p style="margin-top:8px; font-size:0.82em; color:var(--text-sub);">受付 → 調査中 → 申請中 → 完了</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-card-icon">⚡</div>
+      <div class="feature-card-title">アクションボタン</div>
+      <p>謄本取得・申請書生成・写真台帳作成をボタン1つで実行。画面を切り替える必要はありません。</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-card-icon">📜</div>
+      <div class="feature-card-title">工程ログ</div>
+      <p>誰が・いつ・何をしたかを自動記録。タイムライン表示で案件の経緯をひと目で確認できます。</p>
+    </div>
+  </div>
+</div>
+
+<!-- 6. 完成した全体フロー -->
+<div class="section">
+  <div class="section-title"><span class="section-icon">🔄</span> 完成した全体フロー</div>
+  <div class="flow-container">
+    <div class="flow-step highlight">
+      ➕ 新規案件登録（ブラウザから）
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step highlight">
+      🏛️ 地番入力 → 謄本を自動取得 <span class="flow-auto">ボタン1つ</span>
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step">
+      💾 物件情報がデータベースに自動登録
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step highlight">
+      📊 申請データシートを生成 <span class="flow-auto">ボタン1つ</span>
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step">
+      📝 「しるす」に転記 → 申請
+    </div>
+    <div class="flow-arrow">▼</div>
+    <div class="flow-step">
+      ✅ 完了 → 請求書発行
+    </div>
+  </div>
+</div>
+
+<!-- 7. DB統計 -->
+<div class="section">
+  <div class="section-title"><span class="section-icon">📊</span> データベースの内訳（書類タイプ別）</div>
+  <div class="chart-container">
+    <canvas id="docTypeChart"></canvas>
+  </div>
+</div>
+
+<!-- 8. Phase 5 CTA -->
+<div class="cta-box">
+  <div class="section-title"><span class="section-icon">🚀</span> Phase 5に向けて ─ 半嶺社長へのお願い</div>
+
+  <div class="cta-subtitle">📌 テストのお願い</div>
+  <ol class="cta-list numbered">
+    <li>現在進行中の案件をダッシュボードから登録してください</li>
+    <li>登録した案件の「謄本取得」ボタンを押してみてください</li>
+    <li>申請データシートを生成して、「しるす」の入力項目と照合してください</li>
+    <li>気になった点やうまくいかない点があれば、フィードバックをください</li>
+  </ol>
+
+  <div class="cta-subtitle">🖥️ ダッシュボードの起動方法</div>
+  <div class="cta-code">
+    <span class="comment"># ターミナルで以下を実行</span><br>
+    python3 ~/Desktop/hanmine_automation/dashboard_v2.py<br><br>
+    <span class="comment"># ブラウザで以下を開く</span><br>
+    http://localhost:8080
+  </div>
+</div>
+
+</div><!-- /.container -->
+
+<!-- Footer -->
+<div class="footer">
+  <div class="footer-confidential">CONFIDENTIAL</div>
+  <div class="footer-credit">U&I Consulting</div>
+</div>
+
+<script>
+// Doughnut Chart - Document Types
+var ctx = document.getElementById('docTypeChart').getContext('2d');
+new Chart(ctx, {
+  type: 'doughnut',
+  data: {
+    labels: ['現場写真', 'その他', '申請書', '謄本', '契約書', '図面', '見積書'],
+    datasets: [{
+      data: [1403, 1297, 659, 361, 181, 158, 36],
+      backgroundColor: [
+        '#1A2540',
+        '#2C3E5A',
+        '#B8912A',
+        '#D4A843',
+        '#6B7280',
+        '#9CA3AF',
+        '#D1D5DB'
+      ],
+      borderColor: '#FFFFFF',
+      borderWidth: 2,
+      hoverOffset: 8
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: {
+          padding: 16,
+          usePointStyle: true,
+          pointStyleWidth: 12,
+          font: { size: 13, family: "system-ui, sans-serif" }
+        }
+      },
+      tooltip: {
+        callbacks: {
+          label: function(ctx) {
+            var total = ctx.dataset.data.reduce(function(a,b){return a+b},0);
+            var pct = ((ctx.raw / total) * 100).toFixed(1);
+            return ctx.label + ': ' + ctx.raw.toLocaleString() + '件 (' + pct + '%)';
+          }
+        }
+      }
+    },
+    cutout: '55%'
+  }
+});
+</script>
+
+</body>
+</html>
