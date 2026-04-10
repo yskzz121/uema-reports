@@ -67,12 +67,13 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--bg-page); color:v
 .report-card:hover { transform:translateY(-2px); box-shadow:0 4px 16px rgba(0,0,0,0.08); border-color:#ccc; }
 
 .card-icon {
-  width:48px; height:auto; min-height:48px; border-radius:10px;
+  width:52px; height:auto; min-height:48px; border-radius:10px;
   display:flex; align-items:center; justify-content:center;
-  font-family:'M PLUS Rounded 1c',sans-serif; font-size:17px; font-weight:900;
-  flex-shrink:0;
+  font-family:'M PLUS Rounded 1c',sans-serif; font-size:13px; font-weight:900;
+  flex-shrink:0; line-height:1.2; text-align:center; padding:6px 4px;
 }
 .card-icon.weekly { background:rgba(204,34,0,0.08); color:var(--brand-red); }
+.card-week-tag { display:inline-block; background:var(--brand-yellow); color:#1A0A00; font-size:10px; font-weight:700; padding:2px 7px; border-radius:4px; margin-right:6px; vertical-align:middle; letter-spacing:0.02em; }
 .card-icon.monthly { background:rgba(34,102,170,0.08); color:#2266AA; }
 .card-icon.quarterly { background:rgba(26,138,80,0.08); color:#1A8A50; }
 
@@ -143,16 +144,16 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--bg-page); color:v
       <div class="store-header"><span class="store-dot">🌺</span>登川店</div>
       <div class="report-grid">
         <a class="report-card" href="weekly/登川店/2026/04/W14.html">
-          <div class="card-icon weekly">W14</div>
+          <div class="card-icon weekly">4月<br>1週</div>
           <div class="card-body">
-            <div class="card-meta">4/1（水）– 4/7（火）</div>
+            <div class="card-meta"><span class="card-week-tag">W14</span>4/1（水）– 4/7（火）</div>
             <div class="card-details"><span class="score-badge score-S">S — 100点</span><span class="card-sales">¥3,941,510</span></div>
           </div>
         </a>
         <a class="report-card" href="weekly/登川店/2026/03/W12.html">
-          <div class="card-icon weekly">W12</div>
+          <div class="card-icon weekly">3月<br>4週</div>
           <div class="card-body">
-            <div class="card-meta">3/22（日）– 3/28（土）</div>
+            <div class="card-meta"><span class="card-week-tag">W12</span>3/22（日）– 3/28（土）</div>
             <div class="card-details"><span class="score-badge score-S">S — 94点</span><span class="card-sales">¥3,022,928</span></div>
           </div>
         </a>
@@ -163,16 +164,16 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--bg-page); color:v
       <div class="store-header"><span class="store-dot">🌺</span>江洲店</div>
       <div class="report-grid">
         <a class="report-card" href="weekly/江洲店/2026/04/W14.html">
-          <div class="card-icon weekly">W14</div>
+          <div class="card-icon weekly">4月<br>1週</div>
           <div class="card-body">
-            <div class="card-meta">4/1（水）– 4/7（火）</div>
+            <div class="card-meta"><span class="card-week-tag">W14</span>4/1（水）– 4/7（火）</div>
             <div class="card-details"><span class="score-badge score-S">S — 91点</span><span class="card-sales">¥1,990,000</span></div>
           </div>
         </a>
         <a class="report-card" href="weekly/江洲店/2026/03/W12.html">
-          <div class="card-icon weekly">W12</div>
+          <div class="card-icon weekly">3月<br>4週</div>
           <div class="card-body">
-            <div class="card-meta">3/22（日）– 3/28（土）</div>
+            <div class="card-meta"><span class="card-week-tag">W12</span>3/22（日）– 3/28（土）</div>
             <div class="card-details"><span class="score-badge score-A">A — 82点</span><span class="card-sales">¥1,723,212</span></div>
           </div>
         </a>
@@ -183,9 +184,9 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--bg-page); color:v
       <div class="store-header"><span class="store-dot">🌺</span>与勝店</div>
       <div class="report-grid">
         <a class="report-card" href="weekly/与勝店/2026/04/W14.html">
-          <div class="card-icon weekly">W14</div>
+          <div class="card-icon weekly">4月<br>1週</div>
           <div class="card-body">
-            <div class="card-meta">4/1（水）– 4/7（火）</div>
+            <div class="card-meta"><span class="card-week-tag">W14</span>4/1（水）– 4/7（火）</div>
             <div class="card-details"><span class="score-badge score-B">B — 73点</span><span class="card-sales">¥1,131,575</span></div>
           </div>
         </a>
@@ -196,9 +197,9 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--bg-page); color:v
       <div class="store-header"><span class="store-dot">🌺</span>美里店</div>
       <div class="report-grid">
         <a class="report-card" href="weekly/美里店/2026/04/W14.html">
-          <div class="card-icon weekly">W14</div>
+          <div class="card-icon weekly">4月<br>1週</div>
           <div class="card-body">
-            <div class="card-meta">4/1（水）– 4/7（火）</div>
+            <div class="card-meta"><span class="card-week-tag">W14</span>4/1（水）– 4/7（火）</div>
             <div class="card-details"><span class="score-badge score-B">B — 79点</span><span class="card-sales">¥1,436,720</span></div>
           </div>
         </a>
@@ -209,9 +210,9 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--bg-page); color:v
       <div class="store-header"><span class="store-dot">🌺</span>山内店</div>
       <div class="report-grid">
         <a class="report-card" href="weekly/山内店/2026/04/W14.html">
-          <div class="card-icon weekly">W14</div>
+          <div class="card-icon weekly">4月<br>1週</div>
           <div class="card-body">
-            <div class="card-meta">4/1（水）– 4/7（火）</div>
+            <div class="card-meta"><span class="card-week-tag">W14</span>4/1（水）– 4/7（火）</div>
             <div class="card-details"><span class="score-badge score-A">A — 88点</span><span class="card-sales">¥1,817,265</span></div>
           </div>
         </a>
@@ -222,9 +223,9 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--bg-page); color:v
       <div class="store-header"><span class="store-dot">🌺</span>石川店</div>
       <div class="report-grid">
         <a class="report-card" href="weekly/石川店/2026/04/W14.html">
-          <div class="card-icon weekly">W14</div>
+          <div class="card-icon weekly">4月<br>1週</div>
           <div class="card-body">
-            <div class="card-meta">4/1（水）– 4/7（火）</div>
+            <div class="card-meta"><span class="card-week-tag">W14</span>4/1（水）– 4/7（火）</div>
             <div class="card-details"><span class="score-badge score-D">D — 57点</span><span class="card-sales">¥962,350</span></div>
           </div>
         </a>
@@ -235,9 +236,9 @@ body { font-family:'Noto Sans JP',sans-serif; background:var(--bg-page); color:v
       <div class="store-header"><span class="store-dot">🌺</span>泡瀬店</div>
       <div class="report-grid">
         <a class="report-card" href="weekly/泡瀬店/2026/04/W14.html">
-          <div class="card-icon weekly">W14</div>
+          <div class="card-icon weekly">4月<br>1週</div>
           <div class="card-body">
-            <div class="card-meta">4/1（水）– 4/7（火）</div>
+            <div class="card-meta"><span class="card-week-tag">W14</span>4/1（水）– 4/7（火）</div>
             <div class="card-details"><span class="score-badge score-B">B — 76点</span><span class="card-sales">¥1,228,045</span></div>
           </div>
         </a>
